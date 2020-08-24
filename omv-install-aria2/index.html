@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+        <title>OMV配置Aria2 - qinkangdeid &#39;s blog</title><meta name="Description" content="关于 qinkangdeid &#39;s blog "><meta property="og:title" content="OMV配置Aria2" />
+<meta property="og:description" content="[TOC] Aria2是一款非常棒的多线程下载工具，最最关键的是，它支持百度的下载，相信这一定是广大网友的福音 下面的步骤需要使用到Docker,如果还" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://qinkangdeid.github.io/omv-install-aria2/" />
+<meta property="og:image" content="https://qinkangdeid.github.io/logo.png"/>
+<meta property="article:published_time" content="2019-02-13T19:49:59+08:00" />
+<meta property="article:modified_time" content="2019-02-13T19:49:59+08:00" />
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://qinkangdeid.github.io/logo.png"/>
+
+<meta name="twitter:title" content="OMV配置Aria2"/>
+<meta name="twitter:description" content="[TOC] Aria2是一款非常棒的多线程下载工具，最最关键的是，它支持百度的下载，相信这一定是广大网友的福音 下面的步骤需要使用到Docker,如果还"/>
+<meta name="application-name" content="qinkangdeid">
+<meta name="apple-mobile-web-app-title" content="qinkangdeid"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://qinkangdeid.github.io/omv-install-aria2/" /><link rel="prev" href="https://qinkangdeid.github.io/omv-config-smb/" /><link rel="next" href="https://qinkangdeid.github.io/omv-install-kodexplorer/" /><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/normalize.css@8.0.1/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.13.0/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.7.2/animate.min.css"><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "OMV配置Aria2",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/qinkangdeid.github.io\/omv-install-aria2\/"
+        },"image": [{
+                            "@type": "ImageObject",
+                            "url": "https:\/\/qinkangdeid.github.io\/images\/Apple-Devices-Preview.png",
+                            "width":  3200 ,
+                            "height":  2048 
+                        }],"genre": "posts","keywords": "OMV","wordcount":  2276 ,
+        "url": "https:\/\/qinkangdeid.github.io\/omv-install-aria2\/","datePublished": "2019-02-13T19:49:59+08:00","dateModified": "2019-02-13T19:49:59+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+            "@type": "Organization",
+            "name": "qinkangdeid","logo": {
+                    "@type": "ImageObject",
+                    "url": "https:\/\/qinkangdeid.github.io\/images\/avatar.png",
+                    "width":  664 ,
+                    "height":  664 
+                }},"author": {
+                "@type": "Person",
+                "name": "qinkangdeid"
+            },"description": ""
+    }
+    </script></head>
+    <body header-desktop="fixed" header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="qinkangdeid &#39;s blog"><span class="header-title-pre"><i class='far fa-kiss-wink-heart fa-fw'></i></span>qinkangdeid &#39;s blog</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 所有文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><a class="menu-item" href="/categories/documentation/"> 文档 </a><a class="menu-item" href="/about/"> 关于 </a><a class="menu-item" href="https://github.com/qinkangdeid" title="GitHub" rel="noopener noreffer" target="_blank"><i class='fab fa-github fa-fw'></i>  </a><span class="menu-item delimiter"></span><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="qinkangdeid &#39;s blog"><span class="header-title-pre"><i class='far fa-kiss-wink-heart fa-fw'></i></span>qinkangdeid &#39;s blog</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><a class="menu-item" href="/posts/" title="">所有文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a class="menu-item" href="/categories/documentation/" title="">文档</a><a class="menu-item" href="/about/" title="">关于</a><a class="menu-item" href="https://github.com/qinkangdeid" title="GitHub" rel="noopener noreffer" target="_blank"><i class='fab fa-github fa-fw'></i></a><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                <i class="fas fa-adjust fa-fw"></i>
+            </a></div>
+    </div>
+</header>
+<div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+</div>
+<main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">目录</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animated flipInX">OMV配置Aria2</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>qinkangdeid</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/%E6%8A%98%E8%85%BE/"><i class="far fa-folder fa-fw"></i>折腾</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2019-02-13">2019-02-13</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 2276 字&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 5 分钟&nbsp;</div>
+        </div><div class="featured-image"><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/omv/aria2.png"
+        data-srcset="/images/omv/aria2.png, /images/omv/aria2.png 1.5x, /images/omv/aria2.png 2x"
+        data-sizes="auto"
+        alt="/images/omv/aria2.png"
+        title="/images/omv/aria2.png" /></div><div class="details toc" id="toc-static"  kept="">
+                <div class="details-summary toc-title">
+                    <span>目录</span>
+                    <span><i class="details-icon fas fa-angle-right"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#命令行安装">命令行安装</a></li>
+    <li><a href="#web管理界面安装">Web管理界面安装</a></li>
+    <li><a href="#连接管理界面">连接管理界面</a></li>
+    <li><a href="#百度下载">百度下载</a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><p>[TOC]</p>
+<p>Aria2是一款非常棒的多线程下载工具，最最关键的是，它支持百度的下载，相信这一定是广大网友的福音</p>
+<blockquote>
+<p>下面的步骤需要使用到Docker,如果还没有安装的请先安装，<a href="https://www.jianshu.com/p/5b0eacc61527" target="_blank" rel="noopener noreffer">查看OMV配置Docker</a></p>
+</blockquote>
+<p>这里我们使用docker进行安装aria2，很小，只包含一个daemon进程</p>
+<ul>
+<li>首先查看你用户的PGID/PUID，</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># 使用 id {your_username} 命令查看即可</span>
+qinkangdeid@omv:~$ id qinkangdeid
+<span class="nv">uid</span><span class="o">=</span>1000<span class="o">(</span>qinkangdeid<span class="o">)</span> <span class="nv">gid</span><span class="o">=</span>100<span class="o">(</span>users<span class="o">)</span> <span class="nv">组</span><span class="o">=</span>100<span class="o">(</span>users<span class="o">)</span>,24<span class="o">(</span>cdrom<span class="o">)</span>,25<span class="o">(</span>floppy<span class="o">)</span>,27<span class="o">(</span>sudo<span class="o">)</span>,29<span class="o">(</span>audio<span class="o">)</span>,30<span class="o">(</span>dip<span class="o">)</span>,33<span class="o">(</span>www-data<span class="o">)</span>,44<span class="o">(</span>video<span class="o">)</span>,46<span class="o">(</span>plugdev<span class="o">)</span>,108<span class="o">(</span>netdev<span class="o">)</span>,110<span class="o">(</span>ssh<span class="o">)</span>,1000<span class="o">(</span>qinkangdeid<span class="o">)</span>,997<span class="o">(</span>openmediavault-webgui<span class="o">)</span>,996<span class="o">(</span>docker<span class="o">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>例如我的uid=1000 gid=100(users)</p>
+<p>uid=1000(qinkangdeid) gid=100(users) 就是你想要的了</p>
+</blockquote>
+<h2 id="命令行安装">命令行安装</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"> docker run <span class="se">\
+</span><span class="se"></span>   -d <span class="se">\
+</span><span class="se"></span>   --name aria2 <span class="se">\ </span> 
+   -p 6800:6800 <span class="se">\
+</span><span class="se"></span>   -u<span class="o">=</span>1000:100<span class="se">\
+</span><span class="se"></span>   --restart<span class="o">=</span>unless-stopped <span class="se">\
+</span><span class="se"></span>   -v /srv/dev-disk-by-label-kulh2t/appdata/aria2/config:/config <span class="se">\ </span>
+   -v /srv/dev-disk-by-label-kulh2t/downloads:/downloads <span class="se">\
+</span><span class="se"></span>   opengg/aria2
+</code></pre></td></tr></table>
+</div>
+</div><p>容器数据卷地址：</p>
+<p><code>/config</code>: aria2配置文件和日志文件地址</p>
+<p><code>/downloads</code>： aria2下载存放地址</p>
+<p>我计划是将以上两个容器路径映射到我的宿主机硬盘的两个地址上：</p>
+<blockquote>
+<p>/srv/dev-disk-by-label-kulh2t/appdata/aria2/config : /config</p>
+<p>/srv/dev-disk-by-label-kulh2t/downloads:/downloads</p>
+</blockquote>
+<p>你可以映射到你想映射的位置，只有保证文件夹有权限读取即可</p>
+<p>命令参数释义：</p>
+<blockquote>
+<p>-d  : 镜像以后台方式运行</p>
+<p>—name : 镜像的名字 可以随便起你觉得容易识别的名称</p>
+<p>-p : aria2进程的服务端口 <code>:</code>前面是指代宿主机(你安装OMV的实体机器)的端口;<code>:</code>后面是容器里的进程端口号</p>
+<p>-u: 就是刚才我们获取到的用户的PUID:PGID</p>
+<p>-v : 数据卷映射 和-p一样的 前者是宿主机的路径 后者是容器的路径</p>
+<p>—restart: Docker容器的重启策略</p>
+</blockquote>
+<ul>
+<li>容器的重启策略</li>
+</ul>
+<p>Docker容器的重启策略是面向生产环境的一个启动策略，在开发过程中可以忽略该策略。</p>
+<p>Docker容器的重启都是由Docker守护进程完成的，因此与守护进程息息相关。</p>
+<p>Docker容器的重启策略如下：</p>
+<p><code>no</code>，默认策略，在容器退出时不重启容器</p>
+<p><code>on-failure</code>，在容器非正常退出时（退出状态非0），才会重启容器</p>
+<p><code>on-failure:3</code>，在容器非正常退出时重启容器，最多重启3次</p>
+<p><code>always</code>，在容器退出时总是重启容器</p>
+<p><code>unless-stopped</code>，在容器退出时总是重启容器，但是不考虑在Docker守护进程启动时就已经停止了的容器</p>
+<p>我们将上面的命令复制到命令行窗口执行：</p>
+<blockquote>
+<p>记得将两个 —v的路径映射到你的宿主机地址上</p>
+</blockquote>
+<p>等待镜像下载并运行，执行完成后：</p>
+<p>使用<code>docker ps</code>命令查看容器运行没有</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200319235400.png"
+        data-srcset="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200319235400.png, https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200319235400.png 1.5x, https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200319235400.png 2x"
+        data-sizes="auto"
+        alt="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200319235400.png"
+        title="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200319235400.png" /></p>
+<p>可以看到，aria2的docker镜像已经在运行了</p>
+<p>去查看我们刚才配置的aria2的配置文件路径：</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200319235415.png"
+        data-srcset="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200319235415.png, https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200319235415.png 1.5x, https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200319235415.png 2x"
+        data-sizes="auto"
+        alt="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200319235415.png"
+        title="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200319235415.png" /></p>
+<p>可以看到，当容器运行起来的时候，已经为我们创建了需要的配置文件，这里主要是<code>aria2.conf</code>文件,我们查看一下默认的内容：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">save-session<span class="o">=</span>/config/aria2.session
+input-file<span class="o">=</span>/config/aria2.session
+save-session-interval<span class="o">=</span><span class="m">60</span>
+
+<span class="nv">dir</span><span class="o">=</span>/downloads
+
+file-allocation<span class="o">=</span>prealloc
+disk-cache<span class="o">=</span>128M
+
+enable-rpc<span class="o">=</span><span class="nb">true</span>
+rpc-listen-port<span class="o">=</span><span class="m">6800</span>
+rpc-allow-origin-all<span class="o">=</span><span class="nb">true</span>
+rpc-listen-all<span class="o">=</span><span class="nb">true</span>
+
+rpc-secret<span class="o">=</span>&lt;password&gt;
+
+auto-file-renaming<span class="o">=</span><span class="nb">false</span>
+
+max-connection-per-server<span class="o">=</span><span class="m">16</span>
+min-split-size<span class="o">=</span>1M
+<span class="nv">split</span><span class="o">=</span><span class="m">16</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>可以看到有一项 其实还没有设具体的值：<code>rpc-secret</code>,这是链接aria2服务时需要的token值，把它改成你想要的设置的值即可（随便设置）：例如：rpc-secret=123456</p>
+<p>其他的选项可以先展示默认，以后想要改都可以来这里修改</p>
+<h2 id="web管理界面安装">Web管理界面安装</h2>
+<p>OMV提供了一个操作界面管理docker镜像，也可以在这里创建拉取运行docker镜像</p>
+<p>切换到<code>服务 ---&gt; docker(容器)</code>：</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200319235432.png"
+        data-srcset="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200319235432.png, https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200319235432.png 1.5x, https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200319235432.png 2x"
+        data-sizes="auto"
+        alt="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200319235432.png"
+        title="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200319235432.png" /></p>
+<p>如果你刚才使用命令行安装了aria2，那么现在你也可以在把这里看见他的身影了。</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200319235447.png"
+        data-srcset="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200319235447.png, https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200319235447.png 1.5x, https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200319235447.png 2x"
+        data-sizes="auto"
+        alt="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200319235447.png"
+        title="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200319235447.png" /></p>
+<p>在这里我们也能看到这个容器是在运行的</p>
+<p>想要使用Web界面安装aria2，先要搜索到镜像，进行拉取镜像，找到镜像后点击它</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="http://upload-images.jianshu.io/upload_images/3647768-b2177667c249003f.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240"
+        data-srcset="http://upload-images.jianshu.io/upload_images/3647768-b2177667c249003f.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240, http://upload-images.jianshu.io/upload_images/3647768-b2177667c249003f.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240 1.5x, http://upload-images.jianshu.io/upload_images/3647768-b2177667c249003f.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240 2x"
+        data-sizes="auto"
+        alt="http://upload-images.jianshu.io/upload_images/3647768-b2177667c249003f.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240"
+        title="image-20190203133757421" /></p>
+<p>什么也不需要动，直接点击开始，就会开始拉取镜像了&hellip;
+<img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200319235500.png"
+        data-srcset="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200319235500.png, https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200319235500.png 1.5x, https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200319235500.png 2x"
+        data-sizes="auto"
+        alt="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200319235500.png"
+        title="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200319235500.png" /></p>
+<p>输出那里会显示拉取状态，拉取完成后点击<code>关闭</code>
+<img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200319235514.png"
+        data-srcset="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200319235514.png, https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200319235514.png 1.5x, https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200319235514.png 2x"
+        data-sizes="auto"
+        alt="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200319235514.png"
+        title="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200319235514.png" /></p>
+<p>可以看到我们刚刚拉取完成的镜像已经在镜像列表中了</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200319235530.png"
+        data-srcset="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200319235530.png, https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200319235530.png 1.5x, https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200319235530.png 2x"
+        data-sizes="auto"
+        alt="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200319235530.png"
+        title="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200319235530.png" /></p>
+<ul>
+<li>部署运行镜像</li>
+</ul>
+<p>选中我们刚刚拉取的镜像，并点击<code>部署</code>镜像
+<img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200319235544.png"
+        data-srcset="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200319235544.png, https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200319235544.png 1.5x, https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200319235544.png 2x"
+        data-sizes="auto"
+        alt="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200319235544.png"
+        title="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200319235544.png" /></p>
+<p>将会弹出一个配置窗口，这个窗口其实就是我们上面命令行的各种 -*的配置！</p>
+<p>下面我们按照容器要配置的进行配置，那我怎么知道容器要配置些什么呢？可以去docker-hub上查看该容器需要配置的项目，例如现在的这个容器：<a href="https://hub.docker.com/r/opengg/aria2" target="_blank" rel="noopener noreffer">可以去这里查看</a></p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200319235600.png"
+        data-srcset="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200319235600.png, https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200319235600.png 1.5x, https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200319235600.png 2x"
+        data-sizes="auto"
+        alt="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200319235600.png"
+        title="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200319235600.png" /></p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200319235615.png"
+        data-srcset="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200319235615.png, https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200319235615.png 1.5x, https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200319235615.png 2x"
+        data-sizes="auto"
+        alt="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200319235615.png"
+        title="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200319235615.png" /></p>
+<p>配置完成后，点击保存即可，之后容器会运行起来，直接可以在容器那里查看运行状态</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200319235630.png"
+        data-srcset="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200319235630.png, https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200319235630.png 1.5x, https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200319235630.png 2x"
+        data-sizes="auto"
+        alt="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200319235630.png"
+        title="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200319235630.png" /></p>
+<h2 id="连接管理界面">连接管理界面</h2>
+<p>这个容器是不带GUI界面的，只有一个守护进程在，我们可以使用网上提供的GUI界面连接我们的aria2后台进程</p>
+<p>我这里使用的是这个：http://binux.github.io/yaaw/demo/</p>
+<p>你也可以找一个别的</p>
+<p>打开上面的连接，吧我们的aria2连接上，点击扳手的位置：</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200319235646.png"
+        data-srcset="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200319235646.png, https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200319235646.png 1.5x, https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200319235646.png 2x"
+        data-sizes="auto"
+        alt="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200319235646.png"
+        title="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200319235646.png" /></p>
+<p>aria2的连接连接是：http://IP:6800/jsonrpc</p>
+<p>刚才我们还配置了一个token密码，所以我们的连接地址应该写成：</p>
+<p>http://token:123456@192.168.50.118:6800/jsonrpc</p>
+<p>token: 后面带的就是你刚才设置的rpc-secret=123456的值</p>
+<p>之后点击保存,之后如果连接上了，界面右上角就会出现aria2的版本和下载速度标识</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200319235701.png"
+        data-srcset="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200319235701.png, https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200319235701.png 1.5x, https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200319235701.png 2x"
+        data-sizes="auto"
+        alt="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200319235701.png"
+        title="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200319235701.png" /></p>
+<h2 id="百度下载">百度下载</h2>
+<p>aria2可以下载百度盘的资源，需要使用一个插件进行转链</p>
+<p>地址：https://github.com/acgotaku/BaiduExporter</p>
+<p>克隆下来</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">git clone https://github.com/acgotaku/BaiduExporter.git
+</code></pre></td></tr></table>
+</div>
+</div><p>然后使用chrome安装上去：
+<img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200319235715.png"
+        data-srcset="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200319235715.png, https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200319235715.png 1.5x, https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200319235715.png 2x"
+        data-sizes="auto"
+        alt="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200319235715.png"
+        title="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200319235715.png" /></p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200319235728.png"
+        data-srcset="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200319235728.png, https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200319235728.png 1.5x, https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200319235728.png 2x"
+        data-sizes="auto"
+        alt="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200319235728.png"
+        title="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200319235728.png" /></p>
+<p>选择你刚才下载插件的地址</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200319235740.png"
+        data-srcset="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200319235740.png, https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200319235740.png 1.5x, https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200319235740.png 2x"
+        data-sizes="auto"
+        alt="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200319235740.png"
+        title="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200319235740.png" /></p>
+<p>即可看到插件安装完成：</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200319235753.png"
+        data-srcset="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200319235753.png, https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200319235753.png 1.5x, https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200319235753.png 2x"
+        data-sizes="auto"
+        alt="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200319235753.png"
+        title="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200319235753.png" /></p>
+<p>现在随便去找一个百度的下载，就能看见左侧有一个<code>导出下载</code></p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200319235809.png"
+        data-srcset="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200319235809.png, https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200319235809.png 1.5x, https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200319235809.png 2x"
+        data-sizes="auto"
+        alt="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200319235809.png"
+        title="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200319235809.png" /></p>
+<p>设置我们的aria2进程：</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200319235824.png"
+        data-srcset="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200319235824.png, https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200319235824.png 1.5x, https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200319235824.png 2x"
+        data-sizes="auto"
+        alt="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200319235824.png"
+        title="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200319235824.png" /></p>
+<p>把我们刚才连接GUI界面的连接填写上去</p>
+<p>http://token:123456@192.168.50.118:6800/jsonrpc</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200319235840.png"
+        data-srcset="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200319235840.png, https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200319235840.png 1.5x, https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200319235840.png 2x"
+        data-sizes="auto"
+        alt="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200319235840.png"
+        title="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200319235840.png" /></p>
+<p>之后鼠标再次悬浮到<code>导出下载</code>，点击选中我们刚刚配置的aria2服务：我的名字改成了OMV，</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200319235916.png"
+        data-srcset="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200319235916.png, https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200319235916.png 1.5x, https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200319235916.png 2x"
+        data-sizes="auto"
+        alt="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200319235916.png"
+        title="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200319235916.png" /></p>
+<p>之后即可弹出下面的提示</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200319235929.png"
+        data-srcset="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200319235929.png, https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200319235929.png 1.5x, https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200319235929.png 2x"
+        data-sizes="auto"
+        alt="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200319235929.png"
+        title="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200319235929.png" /></p>
+<p>之后任务已经在下载了，可以去http://binux.github.io/yaaw/demo/查看你的任务进度</p>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>更新于 2019-02-13</span>
+            </div>
+            <div class="post-info-license"></div>
+        </div>
+        <div class="post-info-line">
+            <div class="post-info-md"><span>
+                            <a class="link-to-markdown" href="/omv-install-aria2/index.md" target="_blank">阅读原始文档</a>
+                        </span></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="https://qinkangdeid.github.io/omv-install-aria2/" data-title="OMV配置Aria2" data-image="/images/omv/aria2.png" data-ralateuid="qinkangdeid"><i class="fab fa-weibo fa-fw"></i></a><a href="javascript:void(0);" title="分享到 百度" data-sharer="baidu" data-url="https://qinkangdeid.github.io/omv-install-aria2/" data-title="OMV配置Aria2"><i data-svg-src="https://cdn.jsdelivr.net/npm/simple-icons@2.14.0/icons/baidu.svg"></i></a><a href="javascript:void(0);" title="分享到 Evernote" data-sharer="evernote" data-url="https://qinkangdeid.github.io/omv-install-aria2/" data-title="OMV配置Aria2"><i class="fab fa-evernote fa-fw"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/omv/">OMV</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/omv-config-smb/" class="prev" rel="prev" title="OMV共享文件夹/SMB设置"><i class="fas fa-angle-left fa-fw"></i>OMV共享文件夹/SMB设置</a>
+            <a href="/omv-install-kodexplorer/" class="next" rel="next" title="OMV安装可道云(kodexplorer)">OMV安装可道云(kodexplorer)<i class="fas fa-angle-right fa-fw"></i></a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.74.3">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw"></i> LoveIt</a>
+                </div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2019 - 2020</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">qinkangdeid</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="回到顶部">
+                <i class="fas fa-arrow-up fa-fw"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="查看评论">
+                <i class="fas fa-comment fa-fw"></i>
+            </a>
+        </div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery.js@1.2.0/dist/css/lightgallery.min.css"><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/smooth-scroll@16.1.3/dist/smooth-scroll.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.2.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lightgallery.js@1.2.0/dist/js/lightgallery.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lg-thumbnail.js@1.2.0/dist/lg-thumbnail.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lg-zoom.js@1.2.0/dist/lg-zoom.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sharer.js@0.4.0/sharer.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":10},"comment":{},"lightGallery":{"actualSize":false,"exThumbImage":"data-thumbnail","hideBarsDelay":2000,"selector":".lightgallery","speed":400,"thumbContHeight":80,"thumbWidth":80,"thumbnail":true}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

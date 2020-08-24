@@ -1,0 +1,17 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>Router - 标签 - qinkangdeid &#39;s blog</title>
+        <link>https://qinkangdeid.github.io/tags/router/</link>
+        <description>Router - 标签 - qinkangdeid &#39;s blog</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>qinkangdeidd@gmail.com (qinkangdeid)</managingEditor>
+            <webMaster>qinkangdeidd@gmail.com (qinkangdeid)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Fri, 03 May 2019 11:59:16 &#43;0800</lastBuildDate><atom:link href="https://qinkangdeid.github.io/tags/router/" rel="self" type="application/rss+xml" /><item>
+    <title>KoolShare-LEDE-x86安装</title>
+    <link>https://qinkangdeid.github.io/install-koolshare-lede/</link>
+    <pubDate>Fri, 03 May 2019 11:59:16 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>https://qinkangdeid.github.io/install-koolshare-lede/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/images/omv/koolshare-lede.png" referrerpolicy="no-referrer">
+            </div>前期矿难就入了一款蜗牛星际的矿机，之前一直安装的是黑裙在使用，也因为已经装了OMV了，体验完了之后看看还有什么用处，正好是双网口， 这颗CPU]]></description>
+</item></channel>
+</rss>

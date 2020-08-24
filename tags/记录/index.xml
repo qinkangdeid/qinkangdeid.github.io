@@ -1,0 +1,17 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>记录 - 标签 - qinkangdeid &#39;s blog</title>
+        <link>https://qinkangdeid.github.io/tags/%E8%AE%B0%E5%BD%95/</link>
+        <description>记录 - 标签 - qinkangdeid &#39;s blog</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>qinkangdeidd@gmail.com (qinkangdeid)</managingEditor>
+            <webMaster>qinkangdeidd@gmail.com (qinkangdeid)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Sun, 23 Aug 2020 11:59:16 &#43;0800</lastBuildDate><atom:link href="https://qinkangdeid.github.io/tags/%E8%AE%B0%E5%BD%95/" rel="self" type="application/rss+xml" /><item>
+    <title>Typora设置PicGo图床</title>
+    <link>https://qinkangdeid.github.io/typora-config-picgo/</link>
+    <pubDate>Sun, 23 Aug 2020 11:59:16 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>https://qinkangdeid.github.io/typora-config-picgo/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/images/picgo/logo.png" referrerpolicy="no-referrer">
+            </div>[[TOC]] 安装PicGo 1 brew cask install picGo 配置github图床 仓库：用户名/仓库地址 分支: 存放图片的分支 具体可以直接参考官方教程 我也是去那里扒拉的 这是记录一]]></description>
+</item></channel>
+</rss>

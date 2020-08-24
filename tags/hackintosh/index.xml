@@ -1,0 +1,44 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>hackintosh - 标签 - qinkangdeid &#39;s blog</title>
+        <link>https://qinkangdeid.github.io/tags/hackintosh/</link>
+        <description>hackintosh - 标签 - qinkangdeid &#39;s blog</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>qinkangdeidd@gmail.com (qinkangdeid)</managingEditor>
+            <webMaster>qinkangdeidd@gmail.com (qinkangdeid)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Thu, 10 May 2018 21:46:59 &#43;0800</lastBuildDate><atom:link href="https://qinkangdeid.github.io/tags/hackintosh/" rel="self" type="application/rss+xml" /><item>
+    <title>黑苹果安装记录</title>
+    <link>https://qinkangdeid.github.io/install/</link>
+    <pubDate>Thu, 10 May 2018 21:46:59 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>https://qinkangdeid.github.io/install/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/images/hackintosh/hackintosh.jpg" referrerpolicy="no-referrer">
+            </div>黑苹果的定义和说明网上已经有详细的讲解了，随便搜索一下&quot;黑苹果&rdquo;，就能出现很多文章描述，找到了下面一句总结性的话语： &]]></description>
+</item><item>
+    <title>技嘉在z370n-wifi黑苹果EFI</title>
+    <link>https://qinkangdeid.github.io/readme/</link>
+    <pubDate>Thu, 10 May 2018 19:46:59 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>https://qinkangdeid.github.io/readme/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/images/hackintosh/hackintosh.jpg" referrerpolicy="no-referrer">
+            </div>前言 如果你的主板和我的是一样的，那么你可以尝试直接使用这个EFI文件进行安装。 所有资源都来源于网络，这是我实践后的结果副本，感谢互联网上那些]]></description>
+</item><item>
+    <title>技嘉在z370n-wifi黑苹果EFI更新日志</title>
+    <link>https://qinkangdeid.github.io/changelog/</link>
+    <pubDate>Thu, 10 May 2018 19:46:59 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>https://qinkangdeid.github.io/changelog/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/images/hackintosh/hackintosh.jpg" referrerpolicy="no-referrer">
+            </div>更新日志 2020-03-05 macOS | Version: 10.15.3 Clover Version update to: r5041 kexts update AppleALC 1.4.7 IntelMausi 1.0.2 Lilu 1.4.2 SmallTreeIntel82576 1.0.6 USBInjectAll 0.7.3 VirtualSMC 1.1.1 WhateverGreen 1.3.7 2019-12-12 macOS | Version: 10.15.2 Clover Version update to: r5099 Lilu | Version: 1.4.0 AppleALC | Version: 1.4.4 WhateverGreen | Version: 1.3.5 2019-11-02 macOS | Version: 10.15.1 AppleALC | Version: 1.4.3 WhateverGreen | Version: 1.3.4 VirtualSMC.kext | Version: 1.0.9 2019-10-09]]></description>
+</item><item>
+    <title>制作黑苹果U盘启动器</title>
+    <link>https://qinkangdeid.github.io/usb-installer/</link>
+    <pubDate>Wed, 09 May 2018 19:46:59 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>https://qinkangdeid.github.io/usb-installer/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/images/hackintosh/hackintosh.jpg" referrerpolicy="no-referrer">
+            </div>制作黑苹果U盘启动器 前期准备 8GB以上U盘(空盘、有数据的提前备份，制作时会格式化) Mac镜像(在Mac环境AppStore下载或网上找网友]]></description>
+</item></channel>
+</rss>

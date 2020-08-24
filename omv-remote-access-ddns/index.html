@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+        <title>OMV-DDNS访问 - qinkangdeid &#39;s blog</title><meta name="Description" content="关于 qinkangdeid &#39;s blog "><meta property="og:title" content="OMV-DDNS访问" />
+<meta property="og:description" content="远程访问(公网IP-DDNS方式) [TOC] 宽带有公网IP的前提下，使用DDNS的方式相比于内网穿透的方式要更稳定，不需要依赖服务端的带宽和处理能力" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://qinkangdeid.github.io/omv-remote-access-ddns/" />
+<meta property="og:image" content="https://qinkangdeid.github.io/logo.png"/>
+<meta property="article:published_time" content="2019-02-19T19:49:59+08:00" />
+<meta property="article:modified_time" content="2019-02-19T19:49:59+08:00" />
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://qinkangdeid.github.io/logo.png"/>
+
+<meta name="twitter:title" content="OMV-DDNS访问"/>
+<meta name="twitter:description" content="远程访问(公网IP-DDNS方式) [TOC] 宽带有公网IP的前提下，使用DDNS的方式相比于内网穿透的方式要更稳定，不需要依赖服务端的带宽和处理能力"/>
+<meta name="application-name" content="qinkangdeid">
+<meta name="apple-mobile-web-app-title" content="qinkangdeid"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://qinkangdeid.github.io/omv-remote-access-ddns/" /><link rel="prev" href="https://qinkangdeid.github.io/omv-remote-access/" /><link rel="next" href="https://qinkangdeid.github.io/omv-add-https/" /><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/normalize.css@8.0.1/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.13.0/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.7.2/animate.min.css"><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "OMV-DDNS访问",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/qinkangdeid.github.io\/omv-remote-access-ddns\/"
+        },"image": [{
+                            "@type": "ImageObject",
+                            "url": "https:\/\/qinkangdeid.github.io\/images\/Apple-Devices-Preview.png",
+                            "width":  3200 ,
+                            "height":  2048 
+                        }],"genre": "posts","keywords": "OMV","wordcount":  2183 ,
+        "url": "https:\/\/qinkangdeid.github.io\/omv-remote-access-ddns\/","datePublished": "2019-02-19T19:49:59+08:00","dateModified": "2019-02-19T19:49:59+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+            "@type": "Organization",
+            "name": "qinkangdeid","logo": {
+                    "@type": "ImageObject",
+                    "url": "https:\/\/qinkangdeid.github.io\/images\/avatar.png",
+                    "width":  664 ,
+                    "height":  664 
+                }},"author": {
+                "@type": "Person",
+                "name": "qinkangdeid"
+            },"description": ""
+    }
+    </script></head>
+    <body header-desktop="fixed" header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="qinkangdeid &#39;s blog"><span class="header-title-pre"><i class='far fa-kiss-wink-heart fa-fw'></i></span>qinkangdeid &#39;s blog</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 所有文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><a class="menu-item" href="/categories/documentation/"> 文档 </a><a class="menu-item" href="/about/"> 关于 </a><a class="menu-item" href="https://github.com/qinkangdeid" title="GitHub" rel="noopener noreffer" target="_blank"><i class='fab fa-github fa-fw'></i>  </a><span class="menu-item delimiter"></span><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="qinkangdeid &#39;s blog"><span class="header-title-pre"><i class='far fa-kiss-wink-heart fa-fw'></i></span>qinkangdeid &#39;s blog</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><a class="menu-item" href="/posts/" title="">所有文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a class="menu-item" href="/categories/documentation/" title="">文档</a><a class="menu-item" href="/about/" title="">关于</a><a class="menu-item" href="https://github.com/qinkangdeid" title="GitHub" rel="noopener noreffer" target="_blank"><i class='fab fa-github fa-fw'></i></a><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                <i class="fas fa-adjust fa-fw"></i>
+            </a></div>
+    </div>
+</header>
+<div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+</div>
+<main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">目录</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animated flipInX">OMV-DDNS访问</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>qinkangdeid</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/%E6%8A%98%E8%85%BE/"><i class="far fa-folder fa-fw"></i>折腾</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2019-02-19">2019-02-19</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 2183 字&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 5 分钟&nbsp;</div>
+        </div><div class="featured-image"><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/omv/remote-access-2.png"
+        data-srcset="/images/omv/remote-access-2.png, /images/omv/remote-access-2.png 1.5x, /images/omv/remote-access-2.png 2x"
+        data-sizes="auto"
+        alt="/images/omv/remote-access-2.png"
+        title="/images/omv/remote-access-2.png" /></div><div class="details toc" id="toc-static"  kept="">
+                <div class="details-summary toc-title">
+                    <span>目录</span>
+                    <span><i class="details-icon fas fa-angle-right"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#前期准备">前期准备</a></li>
+    <li><a href="#获取公网ip">获取公网IP</a>
+      <ul>
+        <li><a href="#查看你的宽带是否是公网ip">查看你的宽带是否是公网IP</a></li>
+        <li><a href="#尝试获取你宽带的公网ip">尝试获取你宽带的公网IP</a></li>
+      </ul>
+    </li>
+    <li><a href="#光猫改桥接">光猫改桥接</a>
+      <ul>
+        <li><a href="#改桥接步骤">改桥接步骤</a></li>
+      </ul>
+    </li>
+    <li><a href="#pppoe拨号上网">PPPoE拨号上网</a></li>
+    <li><a href="#域名申请">域名申请</a></li>
+    <li><a href="#ddns配置">DDNS配置</a>
+      <ul>
+        <li><a href="#梅林配置ddns">梅林配置DDNS</a></li>
+        <li><a href="#openwrt配置ddns">Openwrt配置DDNS</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h1 id="远程访问公网ip-ddns方式">远程访问(公网IP-DDNS方式)</h1>
+<p>[TOC]</p>
+<blockquote>
+<p>宽带有<code>公网IP</code>的前提下，使用DDNS的方式相比于内网穿透的方式要更稳定，不需要依赖服务端的带宽和处理能力，速度也可以跑满上行。</p>
+</blockquote>
+<p>zerotier虽说也可以跑满速，但是会有些缺点：</p>
+<ul>
+<li>连接到了下午时候会比较的慢</li>
+<li>所有的访问客户端需要安装客户端软件，这是典型的vpn方式，但同时它也更安全一些。</li>
+</ul>
+<h2 id="前期准备">前期准备</h2>
+<ul>
+<li>宽带上网IP为公网IP(<code>最最重要的根源</code>)</li>
+<li>光猫改桥接，路由器拨号</li>
+<li>一个域名</li>
+<li>一台可装DDNS解析插件的路由器或服务器
+<ul>
+<li>路由器有
+<ul>
+<li>硬路由的梅林</li>
+<li>软路由的openwrt</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>内网在运行的服务</li>
+</ul>
+<h2 id="获取公网ip">获取公网IP</h2>
+<h3 id="查看你的宽带是否是公网ip">查看你的宽带是否是公网IP</h3>
+<ul>
+<li>首先查看你的路由器或光猫上获取到的IP</li>
+<li>访问<a href="http://www.ip138.com/" target="_blank" rel="noopener noreffer">http://www.ip138.com/</a></li>
+<li>访问<a href="https://www.whatismyip.com/" target="_blank" rel="noopener noreffer">whatismyip</a></li>
+</ul>
+<p>如果上述三个地方的外网IP都是一致的，那么你的宽带就是公网IP的方式</p>
+<h3 id="尝试获取你宽带的公网ip">尝试获取你宽带的公网IP</h3>
+<p>这一步是下面所有操作的前提，如果你的宽带没有公网IP，那么你需要联系你的宽带运营商获取，网上也有很多介绍获取的途径方式了，我也搜了挺多的，大概是：联通宽带不好拿，移动就不要想了，电信的就比较容易这样的结论。</p>
+<p>不过也稍微注意一下，不要动不动就找客服电话投诉，如果你装宽带的时候你的装机师傅给你留了他的联系方式，你可以先找到装机师傅询问他获取，每个师傅都是有考核的，谁都不喜欢接投诉单，你直接找装机师傅一般都是比较乐意帮忙的，如果他不给或他不能提供的时候，再打<code>10000</code>号找人工申诉获取。</p>
+<p>下面就是我询问的经过，师傅爽快也干净利落
+<img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320131242.png"
+        data-srcset="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320131242.png, https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320131242.png 1.5x, https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320131242.png 2x"
+        data-sizes="auto"
+        alt="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320131242.png"
+        title="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320131242.png" /></p>
+<h2 id="光猫改桥接">光猫改桥接</h2>
+<p>现在装的宽带一般都会默认使用宽带运营商附带的光猫负责拨号上网并兼路由功能（光猫是路由模式），如果要再接一个自己的路由器的话获取到的是一个静态的内网IP（光猫分配的），能够做ddns的设备就不能方便地获取到公网IP。</p>
+<p>如果你目前也是这种方式上网，那么你也需要修改光猫模式为桥接模式（只负责传输信号），宽带的拨号工作留给路由器，这样路由器直接就可以获取你的公网IP（通过WAN口）了，熟悉你家里光猫的型号，登录后台管理界面，修改光猫模式为桥接模式。</p>
+<h3 id="改桥接步骤">改桥接步骤</h3>
+<p>电信光猫的型号有很多种，但大体都相同，我目前使用的是<code>TEWA-708G</code>,以我的为例来操作一下。</p>
+<ul>
+<li>
+<p>登陆光猫后台
+地址是：<a href="http://192.168.1.1:8080" target="_blank" rel="noopener noreffer">http://192.168.1.1:8080</a>
+<img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320131301.png"
+        data-srcset="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320131301.png, https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320131301.png 1.5x, https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320131301.png 2x"
+        data-sizes="auto"
+        alt="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320131301.png"
+        title="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320131301.png" /></p>
+</li>
+<li>
+<p>账户密码获取
+网上大多文章说一定要拿到超管密码，但是我发现我这个型号不需要，直接使用普通用户进去就可以设置
+用户密码就是光猫背面的账户密码了
+<img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320131316.png"
+        data-srcset="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320131316.png, https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320131316.png 1.5x, https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320131316.png 2x"
+        data-sizes="auto"
+        alt="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320131316.png"
+        title="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320131316.png" /></p>
+</li>
+<li>
+<p>配置设置向导
+只需要配置向导就可以完成桥接配置
+<img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320131333.png"
+        data-srcset="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320131333.png, https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320131333.png 1.5x, https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320131333.png 2x"
+        data-sizes="auto"
+        alt="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320131333.png"
+        title="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320131333.png" /></p>
+</li>
+<li>
+<p>选择桥接上网方式
+<img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320131347.png"
+        data-srcset="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320131347.png, https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320131347.png 1.5x, https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320131347.png 2x"
+        data-sizes="auto"
+        alt="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320131347.png"
+        title="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320131347.png" /></p>
+</li>
+<li>
+<p>光猫无线网络配置
+拨号已经不由光猫来做了，那么无线也不需要它来发射了，关掉它
+<img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320131404.png"
+        data-srcset="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320131404.png, https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320131404.png 1.5x, https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320131404.png 2x"
+        data-sizes="auto"
+        alt="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320131404.png"
+        title="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320131404.png" /></p>
+</li>
+<li>
+<p>iTV配置
+没有iTV
+<img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320131419.png"
+        data-srcset="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320131419.png, https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320131419.png 1.5x, https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320131419.png 2x"
+        data-sizes="auto"
+        alt="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320131419.png"
+        title="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320131419.png" /></p>
+</li>
+<li>
+<p>密码修改
+按需设置，我这里不修改了
+<img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320131432.png"
+        data-srcset="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320131432.png, https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320131432.png 1.5x, https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320131432.png 2x"
+        data-sizes="auto"
+        alt="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320131432.png"
+        title="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320131432.png" /></p>
+</li>
+<li>
+<p>确认配置项目
+确认一下刚才进行的配置，如果没有异议，点击完成即可。
+<img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320131446.png"
+        data-srcset="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320131446.png, https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320131446.png 1.5x, https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320131446.png 2x"
+        data-sizes="auto"
+        alt="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320131446.png"
+        title="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320131446.png" /></p>
+</li>
+<li>
+<p>查看配置
+点击完成后等待或重启光猫再进入后台查看，业务配置，看到上网方式为桥接即为完成
+<img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320131503.png"
+        data-srcset="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320131503.png, https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320131503.png 1.5x, https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320131503.png 2x"
+        data-sizes="auto"
+        alt="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320131503.png"
+        title="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320131503.png" /></p>
+</li>
+</ul>
+<h2 id="pppoe拨号上网">PPPoE拨号上网</h2>
+<p>拨号设备可以是电脑也可以是路由器，这里就和平常操作步骤一摸一样了，没什么要说的，但是一般都会使用路由器拨号吧，毕竟家里上网设备很多。</p>
+<h2 id="域名申请">域名申请</h2>
+<p>免费域名也有很多地方可以注册，不过还是自己买一个吧，阿里云上随便买一个杂七杂八后缀的域名也不花多少钱,几十块就能用好多年，<a href="https://wanwang.aliyun.com/domain/?spm=5176.100251.111252.19.74414f157cffn1" target="_blank" rel="noopener noreffer">域名申请</a></p>
+<p>域名申请通过后，创建访问的<code>accessKey</code>和<code>AccessKeySecret</code>,具体是登录阿里云的控制台，在页面右上角，鼠标悬浮到你的头像，出现一个小浮窗，选择<code>accesskeys</code></p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320131518.png"
+        data-srcset="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320131518.png, https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320131518.png 1.5x, https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320131518.png 2x"
+        data-sizes="auto"
+        alt="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320131518.png"
+        title="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320131518.png" /></p>
+<ul>
+<li>AccessKey ID 和 AccessKey Secret 推荐使用 子用户AccessKey(访问控制台RAM) 分配的权限，这样权限更少相对来说更安全些
+点击会弹出提示，我们还是安全起见，配置一个专门ddns的子用户</li>
+</ul>
+<p>点击<code>开始使用子用户AccessKey</code>，起个名字
+<img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320131534.png"
+        data-srcset="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320131534.png, https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320131534.png 1.5x, https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320131534.png 2x"
+        data-sizes="auto"
+        alt="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320131534.png"
+        title="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320131534.png" /></p>
+<p>添加权限
+<img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320131549.png"
+        data-srcset="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320131549.png, https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320131549.png 1.5x, https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320131549.png 2x"
+        data-sizes="auto"
+        alt="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320131549.png"
+        title="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320131549.png" /></p>
+<p>需要配置的权限：</p>
+<ul>
+<li>AliyunDNSReadOnlyAccess(只读访问云解析(DNS)的权限)</li>
+<li>AliyunDNSFullAccess(管理云解析(DNS)的权限)
+依次搜索配置上去
+<img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320131605.png"
+        data-srcset="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320131605.png, https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320131605.png 1.5x, https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320131605.png 2x"
+        data-sizes="auto"
+        alt="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320131605.png"
+        title="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320131605.png" /></li>
+</ul>
+<p>选择完毕，点击确定
+<img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320131619.png"
+        data-srcset="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320131619.png, https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320131619.png 1.5x, https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320131619.png 2x"
+        data-sizes="auto"
+        alt="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320131619.png"
+        title="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320131619.png" /></p>
+<ul>
+<li>配置accesskey
+回到用户管理，点击相应的用户账户进入设置
+<img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320131636.png"
+        data-srcset="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320131636.png, https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320131636.png 1.5x, https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320131636.png 2x"
+        data-sizes="auto"
+        alt="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320131636.png"
+        title="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320131636.png" /></li>
+</ul>
+<p>点击创建accessKey
+<img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320131650.png"
+        data-srcset="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320131650.png, https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320131650.png 1.5x, https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320131650.png 2x"
+        data-sizes="auto"
+        alt="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320131650.png"
+        title="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320131650.png" /></p>
+<p>之后要记得<code>保存</code>好自己的key和密钥信息，DDNS配置的时候就是使用的这些作为账户密码。
+<img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320131708.png"
+        data-srcset="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320131708.png, https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320131708.png 1.5x, https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320131708.png 2x"
+        data-sizes="auto"
+        alt="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320131708.png"
+        title="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320131708.png" /></p>
+<h2 id="ddns配置">DDNS配置</h2>
+<p>这里演示的都是阿里云的域名，其他域名服务商的配置都大同小异</p>
+<h3 id="梅林配置ddns">梅林配置DDNS</h3>
+<ul>
+<li>配置ddns
+我现在的路由器是刷了小宝梅林的网件R6400，里面有应用市场可以一键安装<code>aliddns</code>。下载完成后会在<code>已安装</code>列表里
+<img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320131728.png"
+        data-srcset="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320131728.png, https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320131728.png 1.5x, https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320131728.png 2x"
+        data-sizes="auto"
+        alt="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320131728.png"
+        title="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320131728.png" /></li>
+</ul>
+<p>下面配置解析，按照下面的图示进行配置，中部的<code>appkey</code>和<code>appsecret</code>就是刚才在阿里云<code>创建AccessKey</code>所获取到的两个字符串
+<img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320131742.png"
+        data-srcset="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320131742.png, https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320131742.png 1.5x, https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320131742.png 2x"
+        data-sizes="auto"
+        alt="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320131742.png"
+        title="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320131742.png" /></p>
+<ul>
+<li>端口转发
+路由器<code>外部网络(WAN)</code> &ndash;&gt; <code>端口转发</code>，在这里配置你需要转发的端口
+例如 我想转发一个内部的http服务，在<code>基本设置</code>那里选取 http
+<img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320131758.png"
+        data-srcset="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320131758.png, https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320131758.png 1.5x, https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320131758.png 2x"
+        data-sizes="auto"
+        alt="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320131758.png"
+        title="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320131758.png" /></li>
+</ul>
+<p>之后会在<code>端口转发列表</code>那里多一条记录，这里需要配置几项：</p>
+<ul>
+<li><code>本地IP</code> ：你搭建的服务的机器所在内网IP 例如：192.168.5.1</li>
+<li><code>本地通信端口</code>：你搭建的服务的访问端口 例如：9999</li>
+<li><code>通信端口范围</code>：这里就是映射到外网访问的端口了
+这里的端口就是要映射内网服务端口到外网去
+例如： 8999  就是访问的192.168.5.1:9999的内网服务</li>
+</ul>
+<p>配置完着三项点击右边的保存即可映射成功。之后你就可以通过上面配置的域名+端口访问这个内网服务了，例如上面的配置 外网访问链接就是： <a href="http://nas.nastemp.abc:8999" target="_blank" rel="noopener noreffer">http://nas.nastemp.abc:8999</a></p>
+<h3 id="openwrt配置ddns">Openwrt配置DDNS</h3>
+<ul>
+<li>配置ddns</li>
+<li>端口转发</li>
+</ul>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>更新于 2019-02-19</span>
+            </div>
+            <div class="post-info-license"></div>
+        </div>
+        <div class="post-info-line">
+            <div class="post-info-md"><span>
+                            <a class="link-to-markdown" href="/omv-remote-access-ddns/index.md" target="_blank">阅读原始文档</a>
+                        </span></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="https://qinkangdeid.github.io/omv-remote-access-ddns/" data-title="OMV-DDNS访问" data-image="/images/omv/remote-access-2.png" data-ralateuid="qinkangdeid"><i class="fab fa-weibo fa-fw"></i></a><a href="javascript:void(0);" title="分享到 百度" data-sharer="baidu" data-url="https://qinkangdeid.github.io/omv-remote-access-ddns/" data-title="OMV-DDNS访问"><i data-svg-src="https://cdn.jsdelivr.net/npm/simple-icons@2.14.0/icons/baidu.svg"></i></a><a href="javascript:void(0);" title="分享到 Evernote" data-sharer="evernote" data-url="https://qinkangdeid.github.io/omv-remote-access-ddns/" data-title="OMV-DDNS访问"><i class="fab fa-evernote fa-fw"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/omv/">OMV</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/omv-remote-access/" class="prev" rel="prev" title="OMV内网穿透访问"><i class="fas fa-angle-left fa-fw"></i>OMV内网穿透访问</a>
+            <a href="/omv-add-https/" class="next" rel="next" title="OMV-添加https保护">OMV-添加https保护<i class="fas fa-angle-right fa-fw"></i></a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.74.3">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw"></i> LoveIt</a>
+                </div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2019 - 2020</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">qinkangdeid</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="回到顶部">
+                <i class="fas fa-arrow-up fa-fw"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="查看评论">
+                <i class="fas fa-comment fa-fw"></i>
+            </a>
+        </div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery.js@1.2.0/dist/css/lightgallery.min.css"><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/smooth-scroll@16.1.3/dist/smooth-scroll.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.2.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lightgallery.js@1.2.0/dist/js/lightgallery.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lg-thumbnail.js@1.2.0/dist/lg-thumbnail.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lg-zoom.js@1.2.0/dist/lg-zoom.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sharer.js@0.4.0/sharer.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":10},"comment":{},"lightGallery":{"actualSize":false,"exThumbImage":"data-thumbnail","hideBarsDelay":2000,"selector":".lightgallery","speed":400,"thumbContHeight":80,"thumbWidth":80,"thumbnail":true}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

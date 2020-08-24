@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+        <title>Debian9安装OMV4 - qinkangdeid &#39;s blog</title><meta name="Description" content="关于 qinkangdeid &#39;s blog "><meta property="og:title" content="Debian9安装OMV4" />
+<meta property="og:description" content="OMV5已经推出，原生支持UEFI启动。可以尝试直接使用官方ISO安装了。 点我前往镜像下载地址 ​ 家里有些硬件留着不使用有些可惜，放着也是放着" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://qinkangdeid.github.io/install-omv4/" />
+<meta property="og:image" content="https://qinkangdeid.github.io/logo.png"/>
+<meta property="article:published_time" content="2019-02-11T19:49:59+08:00" />
+<meta property="article:modified_time" content="2019-02-11T19:49:59+08:00" />
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://qinkangdeid.github.io/logo.png"/>
+
+<meta name="twitter:title" content="Debian9安装OMV4"/>
+<meta name="twitter:description" content="OMV5已经推出，原生支持UEFI启动。可以尝试直接使用官方ISO安装了。 点我前往镜像下载地址 ​ 家里有些硬件留着不使用有些可惜，放着也是放着"/>
+<meta name="application-name" content="qinkangdeid">
+<meta name="apple-mobile-web-app-title" content="qinkangdeid"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://qinkangdeid.github.io/install-omv4/" /><link rel="prev" href="https://qinkangdeid.github.io/install-omv-extras/" /><link rel="next" href="https://qinkangdeid.github.io/omv-config-smb/" /><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/normalize.css@8.0.1/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.13.0/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.7.2/animate.min.css"><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Debian9安装OMV4",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/qinkangdeid.github.io\/install-omv4\/"
+        },"image": [{
+                            "@type": "ImageObject",
+                            "url": "https:\/\/qinkangdeid.github.io\/images\/Apple-Devices-Preview.png",
+                            "width":  3200 ,
+                            "height":  2048 
+                        }],"genre": "posts","keywords": "OMV","wordcount":  1592 ,
+        "url": "https:\/\/qinkangdeid.github.io\/install-omv4\/","datePublished": "2019-02-11T19:49:59+08:00","dateModified": "2019-02-11T19:49:59+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+            "@type": "Organization",
+            "name": "qinkangdeid","logo": {
+                    "@type": "ImageObject",
+                    "url": "https:\/\/qinkangdeid.github.io\/images\/avatar.png",
+                    "width":  664 ,
+                    "height":  664 
+                }},"author": {
+                "@type": "Person",
+                "name": "qinkangdeid"
+            },"description": ""
+    }
+    </script></head>
+    <body header-desktop="fixed" header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="qinkangdeid &#39;s blog"><span class="header-title-pre"><i class='far fa-kiss-wink-heart fa-fw'></i></span>qinkangdeid &#39;s blog</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 所有文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><a class="menu-item" href="/categories/documentation/"> 文档 </a><a class="menu-item" href="/about/"> 关于 </a><a class="menu-item" href="https://github.com/qinkangdeid" title="GitHub" rel="noopener noreffer" target="_blank"><i class='fab fa-github fa-fw'></i>  </a><span class="menu-item delimiter"></span><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="qinkangdeid &#39;s blog"><span class="header-title-pre"><i class='far fa-kiss-wink-heart fa-fw'></i></span>qinkangdeid &#39;s blog</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><a class="menu-item" href="/posts/" title="">所有文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a class="menu-item" href="/categories/documentation/" title="">文档</a><a class="menu-item" href="/about/" title="">关于</a><a class="menu-item" href="https://github.com/qinkangdeid" title="GitHub" rel="noopener noreffer" target="_blank"><i class='fab fa-github fa-fw'></i></a><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                <i class="fas fa-adjust fa-fw"></i>
+            </a></div>
+    </div>
+</header>
+<div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+</div>
+<main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">目录</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animated flipInX">Debian9安装OMV4</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>qinkangdeid</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/%E6%8A%98%E8%85%BE/"><i class="far fa-folder fa-fw"></i>折腾</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2019-02-11">2019-02-11</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 1592 字&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 4 分钟&nbsp;</div>
+        </div><div class="featured-image"><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/omv/omv.png"
+        data-srcset="/images/omv/omv.png, /images/omv/omv.png 1.5x, /images/omv/omv.png 2x"
+        data-sizes="auto"
+        alt="/images/omv/omv.png"
+        title="/images/omv/omv.png" /></div><div class="details toc" id="toc-static"  kept="">
+                <div class="details-summary toc-title">
+                    <span>目录</span>
+                    <span><i class="details-icon fas fa-angle-right"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#软件版本">软件版本</a></li>
+    <li><a href="#安装前操作">安装前操作</a></li>
+    <li><a href="#安装omv">安装OMV</a>
+      <ul>
+        <li><a href="#登录omv">登录OMV</a></li>
+      </ul>
+    </li>
+    <li><a href="#安装后">安装后</a>
+      <ul>
+        <li><a href="#更新">更新</a></li>
+        <li><a href="#设置非root用户连接ssh可选操作">设置非root用户连接ssh(可选操作)</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><blockquote>
+<p><strong>OMV5已经推出，原生支持UEFI启动。可以尝试直接使用官方ISO安装了。</strong>
+<a href="https://sourceforge.net/projects/openmediavault/files/" target="_blank" rel="noopener noreffer">点我前往镜像下载地址</a></p>
+</blockquote>
+<p>​         家里有些硬件留着不使用有些可惜，放着也是放着，不如发挥一点作用,差块主板就是PC，所以就买了块主板，也借此机会学习一下如何组建nas，在nas系统上的选择，最后选择了开源的OMV，OMV基于Debian开发，我的主板只支持UEFI启动，OMV4版本目前不能直接UEFI引导，所以需要使用到Debian，这里做个记录，<a href="https://www.jianshu.com/p/d7584761d44f" target="_blank" rel="noopener noreffer">查看最小安装Debian</a></p>
+<h2 id="软件版本">软件版本</h2>
+<ul>
+<li>Debian9</li>
+<li>omv4</li>
+</ul>
+<h2 id="安装前操作">安装前操作</h2>
+<p>Debian上安装OMV，需要提前解决一些依赖问题</p>
+<ul>
+<li>Install Realtek Firmware</li>
+</ul>
+<blockquote>
+<p><strong>不先安装的话之后安装OMV会报下面的错：</strong></p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">Possible missing firmware /lib/firmware/rtl_nic/rtl8168d-1.fw <span class="k">for</span> module r8169
+</code></pre></td></tr></table>
+</div>
+</div><p>添加下面内容：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># 增加仓库</span> 
+vim /etc/apt/sources.list
+<span class="c1"># 在显示界面 按下字母 i  进入插入模式  复制下面的字符串添加到 sources.list 的最后一行</span>   
+<span class="c1"># 之后 输入  :wq! 保存退出</span> 
+deb http://httpredir.debian.org/debian/ stretch main contrib non-free
+</code></pre></td></tr></table>
+</div>
+</div><p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200319195554.png"
+        data-srcset="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200319195554.png, https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200319195554.png 1.5x, https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200319195554.png 2x"
+        data-sizes="auto"
+        alt="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200319195554.png"
+        title="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200319195554.png" /></p>
+<p>之后还是在命令行操作：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># 更新</span> 
+sudo apt update
+<span class="c1"># 这一步 安装 Realtek Firmware</span>
+sudo apt-get install firmware-realtek
+sudo apt update
+<span class="c1"># 安装其他内核</span> 
+apt-get install firmware-linux firmware-linux-free firmware-linux-nonfree
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="安装omv">安装OMV</h2>
+<ul>
+<li>
+<p>添加包存储库</p>
+<p>复制下面命令到命令行回车执行</p>
+</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">cat <span class="s">&lt;&lt;EOF &gt;&gt; /etc/apt/sources.list.d/openmediavault.list
+</span><span class="s">deb http://packages.openmediavault.org/public arrakis main
+</span><span class="s"># deb http://downloads.sourceforge.net/project/openmediavault/packages arrakis main
+</span><span class="s">## Uncomment the following line to add software from the proposed repository.
+</span><span class="s"># deb http://packages.openmediavault.org/public arrakis-proposed main
+</span><span class="s"># deb http://downloads.sourceforge.net/project/openmediavault/packages arrakis-proposed main
+</span><span class="s">## This software is not part of OpenMediaVault, but is offered by third-party
+</span><span class="s">## developers as a service to OpenMediaVault users.
+</span><span class="s"># deb http://packages.openmediavault.org/public arrakis partner
+</span><span class="s"># deb http://downloads.sourceforge.net/project/openmediavault/packages arrakis partner
+</span><span class="s">EOF</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>
+<p>安装openmediavault 4（Arrakis）软件包</p>
+<p>这块也是一样 复制下面命令到命令行回车执行</p>
+</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># 准备工作</span>
+<span class="nb">export</span> <span class="nv">LANG</span><span class="o">=</span>C
+<span class="nb">export</span> <span class="nv">DEBIAN_FRONTEND</span><span class="o">=</span>noninteractive
+<span class="nb">export</span> <span class="nv">APT_LISTCHANGES_FRONTEND</span><span class="o">=</span>none
+apt-get update
+apt-get --allow-unauthenticated install openmediavault-keyring
+apt-get update
+
+<span class="c1"># 下面是正式安装</span>
+apt-get --yes --auto-remove --show-upgraded <span class="se">\
+</span><span class="se"></span>    --allow-downgrades --allow-change-held-packages <span class="se">\
+</span><span class="se"></span>    --no-install-recommends <span class="se">\
+</span><span class="se"></span>    --option Dpkg::Options::<span class="o">=</span><span class="s2">&#34;--force-confdef&#34;</span> <span class="se">\
+</span><span class="se"></span>    --option DPkg::Options::<span class="o">=</span><span class="s2">&#34;--force-confold&#34;</span> <span class="se">\
+</span><span class="se"></span>    install postfix openmediavault
+</code></pre></td></tr></table>
+</div>
+</div><p>命令行安装会一直在刷安装日志，等待日志刷完，会跳出如下安装成功界面，这个时候表示安装完毕，选择确定之后回车，再按照要求初始化OMV即可。</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200319195704.png"
+        data-srcset="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200319195704.png, https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200319195704.png 1.5x, https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200319195704.png 2x"
+        data-sizes="auto"
+        alt="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200319195704.png"
+        title="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200319195704.png" /></p>
+<ul>
+<li>初始化omv</li>
+</ul>
+<p>这一步骤就相当简单了，只需要一条命令</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">omv-initsystem
+</code></pre></td></tr></table>
+</div>
+</div><p>等待初始化完成后，OMV已经启动完成，之后便可以在浏览器中访问你的刚刚安装的OMV了。</p>
+<ul>
+<li>修改服务端口</li>
+</ul>
+<p>OMV的默认端口的80，但是一般还是不要使用80端口</p>
+<p>命令行输入：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">omv-firstaid  <span class="c1"># 这是OMV的命令行界面配置面板</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>我们选择第二项(<code>configure web control panel</code>)修改Web的访问端口，当然这一个操作是可以在Web界面修改的</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200319195841.png"
+        data-srcset="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200319195841.png, https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200319195841.png 1.5x, https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200319195841.png 2x"
+        data-sizes="auto"
+        alt="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200319195841.png"
+        title="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200319195841.png" /></p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200319195907.png"
+        data-srcset="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200319195907.png, https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200319195907.png 1.5x, https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200319195907.png 2x"
+        data-sizes="auto"
+        alt="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200319195907.png"
+        title="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200319195907.png" /></p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200319195936.png"
+        data-srcset="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200319195936.png, https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200319195936.png 1.5x, https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200319195936.png 2x"
+        data-sizes="auto"
+        alt="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200319195936.png"
+        title="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200319195936.png" /></p>
+<p>按确认后即可成功修改。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">Updating web control panel settings. Please <span class="nb">wait</span> ...
+The web control panel settings were successfully changed.
+
+The web control panel is reachable via URL:
+enp3s0: http://192.168.50.118:9529
+enp3s0: http://fe80::7285:c2ff:feaf:f988%enp3s0:9529
+root@omv:/home/qinkangdeid#
+</code></pre></td></tr></table>
+</div>
+</div><p>验证端口是否修改成功</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">curl http://127.0.0.1:9529
+<span class="c1">## 如果返回一个html即表示已经成功</span>
+
+<span class="c1"># 或Telnet</span>
+telnet 127.0.0.1 <span class="m">9529</span>
+<span class="c1">##  出现下面即可表示端口监听成功</span>
+qinkangdeid@omv:~$ telnet 127.0.0.1 <span class="m">9529</span>
+Trying 127.0.0.1...
+Connected to 127.0.0.1.
+Escape character is <span class="s1">&#39;^]&#39;</span>.
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="登录omv">登录OMV</h3>
+<p>如上设置后，OMV便可以访问了，OMV的访问地址是http://YOUR_IP:YOUR_PORT</p>
+<p>如果你没有修改OMV的访问端口的话，那么直需要在你的浏览器上打上你的OMV机器所在的内网IP即可</p>
+<p>如果你修改了访问端口，就需要在后面加上端口，</p>
+<p>例如我的修改成了9529</p>
+<p>我的访问地址则是：http://192.168.1.118:9529 ，OMV的登录界面如下：</p>
+<blockquote>
+<p>如果你现在还不知道你的OMV所在机器的内网IP，可以使用 ifocnfig 命令查看（需要事先安装net-tools）</p>
+</blockquote>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200319200123.png"
+        data-srcset="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200319200123.png, https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200319200123.png 1.5x, https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200319200123.png 2x"
+        data-sizes="auto"
+        alt="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200319200123.png"
+        title="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200319200123.png" /></p>
+<p>OMV初次使用的默认密码是以下，前面最后的安装提示也有显示的:</p>
+<blockquote>
+<p>admin
+openmediavault</p>
+</blockquote>
+<p>进入后的界面大致如下：</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200319200154.png"
+        data-srcset="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200319200154.png, https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200319200154.png 1.5x, https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200319200154.png 2x"
+        data-sizes="auto"
+        alt="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200319200154.png"
+        title="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200319200154.png" /></p>
+<p>进去第一件事当然是修改默认的密码</p>
+<blockquote>
+<p>系统 &mdash;&gt; 常规设置 &mdash;&gt;  web管理员密码</p>
+</blockquote>
+<p>填入你的新密码，之后注销使用你修改后的用户密码重新登录。</p>
+<h2 id="安装后">安装后</h2>
+<h3 id="更新">更新</h3>
+<p>安装后设置密码后的第一件事件就是先去检查更新，</p>
+<blockquote>
+<p>系统 &mdash;&gt; 更新管理   &mdash;&gt;  检查更新</p>
+</blockquote>
+<p>如果有更新，软件包信息下面就会显示一长串软件信息，之后点击<code>升级</code>按钮即可</p>
+<p>如果没有，软件包信息下面会什么都没有，例如我现在的是最新，目前还没有任何资源需要更新</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200319200244.png"
+        data-srcset="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200319200244.png, https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200319200244.png 1.5x, https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200319200244.png 2x"
+        data-sizes="auto"
+        alt="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200319200244.png"
+        title="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200319200244.png" /></p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200319200328.png"
+        data-srcset="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200319200328.png, https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200319200328.png 1.5x, https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200319200328.png 2x"
+        data-sizes="auto"
+        alt="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200319200328.png"
+        title="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200319200328.png" /></p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200319200352.png"
+        data-srcset="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200319200352.png, https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200319200352.png 1.5x, https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200319200352.png 2x"
+        data-sizes="auto"
+        alt="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200319200352.png"
+        title="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200319200352.png" /></p>
+<h3 id="设置非root用户连接ssh可选操作">设置非root用户连接ssh(可选操作)</h3>
+<p>最好不要使用root做太多设置，如果sudoer能做的事情，就让sudoer做，现在为我们的Debian用户添加进ssh组，允许使用改用户进行ssh连接</p>
+<blockquote>
+<p>访问权限管理 &mdash;&gt; 用户</p>
+</blockquote>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200319200427.png"
+        data-srcset="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200319200427.png, https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200319200427.png 1.5x, https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200319200427.png 2x"
+        data-sizes="auto"
+        alt="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200319200427.png"
+        title="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200319200427.png" /></p>
+<p>选择<code>编辑</code>切到<code>用户组</code>找到<code>ssh</code>组并且打上勾，之后保存，之后即可使用该用户进行ssh连接</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200319200454.png"
+        data-srcset="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200319200454.png, https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200319200454.png 1.5x, https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200319200454.png 2x"
+        data-sizes="auto"
+        alt="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200319200454.png"
+        title="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200319200454.png" /></p>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>更新于 2019-02-11</span>
+            </div>
+            <div class="post-info-license"></div>
+        </div>
+        <div class="post-info-line">
+            <div class="post-info-md"><span>
+                            <a class="link-to-markdown" href="/install-omv4/index.md" target="_blank">阅读原始文档</a>
+                        </span></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="https://qinkangdeid.github.io/install-omv4/" data-title="Debian9安装OMV4" data-image="/images/omv/omv.png" data-ralateuid="qinkangdeid"><i class="fab fa-weibo fa-fw"></i></a><a href="javascript:void(0);" title="分享到 百度" data-sharer="baidu" data-url="https://qinkangdeid.github.io/install-omv4/" data-title="Debian9安装OMV4"><i data-svg-src="https://cdn.jsdelivr.net/npm/simple-icons@2.14.0/icons/baidu.svg"></i></a><a href="javascript:void(0);" title="分享到 Evernote" data-sharer="evernote" data-url="https://qinkangdeid.github.io/install-omv4/" data-title="Debian9安装OMV4"><i class="fab fa-evernote fa-fw"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/omv/">OMV</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/install-omv-extras/" class="prev" rel="prev" title="OMV安装omv-extras"><i class="fas fa-angle-left fa-fw"></i>OMV安装omv-extras</a>
+            <a href="/omv-config-smb/" class="next" rel="next" title="OMV共享文件夹/SMB设置">OMV共享文件夹/SMB设置<i class="fas fa-angle-right fa-fw"></i></a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.74.3">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw"></i> LoveIt</a>
+                </div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2019 - 2020</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">qinkangdeid</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="回到顶部">
+                <i class="fas fa-arrow-up fa-fw"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="查看评论">
+                <i class="fas fa-comment fa-fw"></i>
+            </a>
+        </div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery.js@1.2.0/dist/css/lightgallery.min.css"><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/smooth-scroll@16.1.3/dist/smooth-scroll.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.2.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lightgallery.js@1.2.0/dist/js/lightgallery.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lg-thumbnail.js@1.2.0/dist/lg-thumbnail.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lg-zoom.js@1.2.0/dist/lg-zoom.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sharer.js@0.4.0/sharer.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":10},"comment":{},"lightGallery":{"actualSize":false,"exThumbImage":"data-thumbnail","hideBarsDelay":2000,"selector":".lightgallery","speed":400,"thumbContHeight":80,"thumbWidth":80,"thumbnail":true}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

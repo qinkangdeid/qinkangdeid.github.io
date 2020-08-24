@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+        <title>Typora设置PicGo图床 - qinkangdeid &#39;s blog</title><meta name="Description" content="关于 qinkangdeid &#39;s blog "><meta property="og:title" content="Typora设置PicGo图床" />
+<meta property="og:description" content="[[TOC]] 安装PicGo 1 brew cask install picGo 配置github图床 仓库：用户名/仓库地址 分支: 存放图片的分支 具体可以直接参考官方教程 我也是去那里扒拉的 这是记录一" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://qinkangdeid.github.io/typora-config-picgo/" />
+<meta property="og:image" content="https://qinkangdeid.github.io/logo.png"/>
+<meta property="article:published_time" content="2020-08-23T11:59:16+08:00" />
+<meta property="article:modified_time" content="2020-08-23T11:59:16+08:00" />
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://qinkangdeid.github.io/logo.png"/>
+
+<meta name="twitter:title" content="Typora设置PicGo图床"/>
+<meta name="twitter:description" content="[[TOC]] 安装PicGo 1 brew cask install picGo 配置github图床 仓库：用户名/仓库地址 分支: 存放图片的分支 具体可以直接参考官方教程 我也是去那里扒拉的 这是记录一"/>
+<meta name="application-name" content="qinkangdeid">
+<meta name="apple-mobile-web-app-title" content="qinkangdeid"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://qinkangdeid.github.io/typora-config-picgo/" /><link rel="prev" href="https://qinkangdeid.github.io/install-koolshare-lede/" /><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/normalize.css@8.0.1/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.13.0/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.7.2/animate.min.css"><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Typora设置PicGo图床",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/qinkangdeid.github.io\/typora-config-picgo\/"
+        },"image": [{
+                            "@type": "ImageObject",
+                            "url": "https:\/\/qinkangdeid.github.io\/images\/Apple-Devices-Preview.png",
+                            "width":  3200 ,
+                            "height":  2048 
+                        }],"genre": "posts","keywords": "记录","wordcount":  346 ,
+        "url": "https:\/\/qinkangdeid.github.io\/typora-config-picgo\/","datePublished": "2020-08-23T11:59:16+08:00","dateModified": "2020-08-23T11:59:16+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+            "@type": "Organization",
+            "name": "qinkangdeid","logo": {
+                    "@type": "ImageObject",
+                    "url": "https:\/\/qinkangdeid.github.io\/images\/avatar.png",
+                    "width":  664 ,
+                    "height":  664 
+                }},"author": {
+                "@type": "Person",
+                "name": "qinkangdeid"
+            },"description": ""
+    }
+    </script></head>
+    <body header-desktop="fixed" header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="qinkangdeid &#39;s blog"><span class="header-title-pre"><i class='far fa-kiss-wink-heart fa-fw'></i></span>qinkangdeid &#39;s blog</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 所有文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><a class="menu-item" href="/categories/documentation/"> 文档 </a><a class="menu-item" href="/about/"> 关于 </a><a class="menu-item" href="https://github.com/qinkangdeid" title="GitHub" rel="noopener noreffer" target="_blank"><i class='fab fa-github fa-fw'></i>  </a><span class="menu-item delimiter"></span><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="qinkangdeid &#39;s blog"><span class="header-title-pre"><i class='far fa-kiss-wink-heart fa-fw'></i></span>qinkangdeid &#39;s blog</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><a class="menu-item" href="/posts/" title="">所有文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a class="menu-item" href="/categories/documentation/" title="">文档</a><a class="menu-item" href="/about/" title="">关于</a><a class="menu-item" href="https://github.com/qinkangdeid" title="GitHub" rel="noopener noreffer" target="_blank"><i class='fab fa-github fa-fw'></i></a><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                <i class="fas fa-adjust fa-fw"></i>
+            </a></div>
+    </div>
+</header>
+<div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+</div>
+<main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">目录</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animated flipInX">Typora设置PicGo图床</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>qinkangdeid</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/%E6%8A%98%E8%85%BE/"><i class="far fa-folder fa-fw"></i>折腾</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2020-08-23">2020-08-23</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 346 字&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 1 分钟&nbsp;</div>
+        </div><div class="featured-image"><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/picgo/logo.png"
+        data-srcset="/images/picgo/logo.png, /images/picgo/logo.png 1.5x, /images/picgo/logo.png 2x"
+        data-sizes="auto"
+        alt="/images/picgo/logo.png"
+        title="/images/picgo/logo.png" /></div><div class="details toc" id="toc-static"  kept="">
+                <div class="details-summary toc-title">
+                    <span>目录</span>
+                    <span><i class="details-icon fas fa-angle-right"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#安装picgo">安装PicGo</a></li>
+    <li><a href="#配置github图床">配置github图床</a></li>
+    <li><a href="#安装typora">安装Typora</a></li>
+    <li><a href="#配置typora">配置Typora</a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><p>[[<em>TOC</em>]]</p>
+<h2 id="安装picgo">安装PicGo</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">brew cask install picGo
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="配置github图床">配置github图床</h2>
+<p>仓库：<code>用户名/仓库地址</code></p>
+<p>分支: <code>存放图片的分支</code></p>
+<p>具体可以直接参考<a href="https://picgo.github.io/PicGo-Doc/zh/guide/config.html#github%E5%9B%BE%E5%BA%8A" target="_blank" rel="noopener noreffer">官方教程</a> 我也是去那里扒拉的 这是记录一下 hhhh</p>
+<ul>
+<li>
+<p>新建一个仓库</p>
+<p>用于存放图片</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/create_new_repo.png"
+        data-srcset="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/create_new_repo.png, https://raw.githubusercontent.com/qinkangdeid/pics/imgs/create_new_repo.png 1.5x, https://raw.githubusercontent.com/qinkangdeid/pics/imgs/create_new_repo.png 2x"
+        data-sizes="auto"
+        alt="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/create_new_repo.png"
+        title="img" /></p>
+</li>
+<li>
+<p>生成授权token</p>
+</li>
+</ul>
+<p>为你存放图片的仓库添加授权token用于PicGo操作你的仓库</p>
+<p>访问：https://github.com/settings/tokens</p>
+<p>然后点击<code>Generate new token</code></p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/generate_new_token.png"
+        data-srcset="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/generate_new_token.png, https://raw.githubusercontent.com/qinkangdeid/pics/imgs/generate_new_token.png 1.5x, https://raw.githubusercontent.com/qinkangdeid/pics/imgs/generate_new_token.png 2x"
+        data-sizes="auto"
+        alt="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/generate_new_token.png"
+        title="img" /></p>
+<p>​		把repo的勾打上即可。然后翻到页面最底部，点击<code>Generate token</code>的绿色按钮生成token</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20180508210435.png"
+        data-srcset="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20180508210435.png, https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20180508210435.png 1.5x, https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20180508210435.png 2x"
+        data-sizes="auto"
+        alt="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20180508210435.png"
+        title="img" />
+**注意：**这个token生成后只会显示一次！你要把这个token复制一下存到其他地方以备以后要用。</p>
+<ul>
+<li>配置PicGo</li>
+</ul>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/image-20200823221328042.png"
+        data-srcset="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/image-20200823221328042.png, https://raw.githubusercontent.com/qinkangdeid/pics/imgs/image-20200823221328042.png 1.5x, https://raw.githubusercontent.com/qinkangdeid/pics/imgs/image-20200823221328042.png 2x"
+        data-sizes="auto"
+        alt="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/image-20200823221328042.png"
+        title="image-20200823221328042" /></p>
+<h2 id="安装typora">安装Typora</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">brew cask install typora
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="配置typora">配置Typora</h2>
+<p>上传服务选择PicGo</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/image-20200823221622792.png"
+        data-srcset="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/image-20200823221622792.png, https://raw.githubusercontent.com/qinkangdeid/pics/imgs/image-20200823221622792.png 1.5x, https://raw.githubusercontent.com/qinkangdeid/pics/imgs/image-20200823221622792.png 2x"
+        data-sizes="auto"
+        alt="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/image-20200823221622792.png"
+        title="image-20200823221622792" /></p>
+<p>验证配置是否成功</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/image-20200823221505855.png"
+        data-srcset="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/image-20200823221505855.png, https://raw.githubusercontent.com/qinkangdeid/pics/imgs/image-20200823221505855.png 1.5x, https://raw.githubusercontent.com/qinkangdeid/pics/imgs/image-20200823221505855.png 2x"
+        data-sizes="auto"
+        alt="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/image-20200823221505855.png"
+        title="image-20200823221505855" /></p>
+<p>还可以设置默认的操作，只有粘贴图片就上传到图床</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/image-20200824000737807.png"
+        data-srcset="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/image-20200824000737807.png, https://raw.githubusercontent.com/qinkangdeid/pics/imgs/image-20200824000737807.png 1.5x, https://raw.githubusercontent.com/qinkangdeid/pics/imgs/image-20200824000737807.png 2x"
+        data-sizes="auto"
+        alt="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/image-20200824000737807.png"
+        title="image-20200824000737807" /></p>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>更新于 2020-08-23</span>
+            </div>
+            <div class="post-info-license"></div>
+        </div>
+        <div class="post-info-line">
+            <div class="post-info-md"><span>
+                            <a class="link-to-markdown" href="/typora-config-picgo/index.md" target="_blank">阅读原始文档</a>
+                        </span></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="https://qinkangdeid.github.io/typora-config-picgo/" data-title="Typora设置PicGo图床" data-image="/images/picgo/logo.png" data-ralateuid="qinkangdeid"><i class="fab fa-weibo fa-fw"></i></a><a href="javascript:void(0);" title="分享到 百度" data-sharer="baidu" data-url="https://qinkangdeid.github.io/typora-config-picgo/" data-title="Typora设置PicGo图床"><i data-svg-src="https://cdn.jsdelivr.net/npm/simple-icons@2.14.0/icons/baidu.svg"></i></a><a href="javascript:void(0);" title="分享到 Evernote" data-sharer="evernote" data-url="https://qinkangdeid.github.io/typora-config-picgo/" data-title="Typora设置PicGo图床"><i class="fab fa-evernote fa-fw"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/%E8%AE%B0%E5%BD%95/">记录</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/install-koolshare-lede/" class="prev" rel="prev" title="KoolShare-LEDE-x86安装"><i class="fas fa-angle-left fa-fw"></i>KoolShare-LEDE-x86安装</a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.74.3">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw"></i> LoveIt</a>
+                </div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2019 - 2020</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">qinkangdeid</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="回到顶部">
+                <i class="fas fa-arrow-up fa-fw"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="查看评论">
+                <i class="fas fa-comment fa-fw"></i>
+            </a>
+        </div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery.js@1.2.0/dist/css/lightgallery.min.css"><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/smooth-scroll@16.1.3/dist/smooth-scroll.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.2.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lightgallery.js@1.2.0/dist/js/lightgallery.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lg-thumbnail.js@1.2.0/dist/lg-thumbnail.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lg-zoom.js@1.2.0/dist/lg-zoom.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sharer.js@0.4.0/sharer.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":10},"comment":{},"lightGallery":{"actualSize":false,"exThumbImage":"data-thumbnail","hideBarsDelay":2000,"selector":".lightgallery","speed":400,"thumbContHeight":80,"thumbWidth":80,"thumbnail":true}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

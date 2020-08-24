@@ -1,0 +1,813 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+        <title>OMV配置你的私有云盘--NextCloud - qinkangdeid &#39;s blog</title><meta name="Description" content="关于 qinkangdeid &#39;s blog "><meta property="og:title" content="OMV配置你的私有云盘--NextCloud" />
+<meta property="og:description" content="[TOC] OMV配置你的私有云盘&ndash;NextCloud 现在云盘厂家已经所剩无几，你能选的余地已经很少了，是时候找一个私有的云盘解决方案了。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://qinkangdeid.github.io/omv-install-nextcloud/" />
+<meta property="og:image" content="https://qinkangdeid.github.io/logo.png"/>
+<meta property="article:published_time" content="2019-02-18T19:49:59+08:00" />
+<meta property="article:modified_time" content="2019-02-18T19:49:59+08:00" />
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://qinkangdeid.github.io/logo.png"/>
+
+<meta name="twitter:title" content="OMV配置你的私有云盘--NextCloud"/>
+<meta name="twitter:description" content="[TOC] OMV配置你的私有云盘&ndash;NextCloud 现在云盘厂家已经所剩无几，你能选的余地已经很少了，是时候找一个私有的云盘解决方案了。"/>
+<meta name="application-name" content="qinkangdeid">
+<meta name="apple-mobile-web-app-title" content="qinkangdeid"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://qinkangdeid.github.io/omv-install-nextcloud/" /><link rel="prev" href="https://qinkangdeid.github.io/omv-install-jellyfin/" /><link rel="next" href="https://qinkangdeid.github.io/omv-nextcloud-config-smtp/" /><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/normalize.css@8.0.1/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.13.0/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.7.2/animate.min.css"><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "OMV配置你的私有云盘--NextCloud",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/qinkangdeid.github.io\/omv-install-nextcloud\/"
+        },"image": [{
+                            "@type": "ImageObject",
+                            "url": "https:\/\/qinkangdeid.github.io\/images\/Apple-Devices-Preview.png",
+                            "width":  3200 ,
+                            "height":  2048 
+                        }],"genre": "posts","keywords": "OMV","wordcount":  4491 ,
+        "url": "https:\/\/qinkangdeid.github.io\/omv-install-nextcloud\/","datePublished": "2019-02-18T19:49:59+08:00","dateModified": "2019-02-18T19:49:59+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+            "@type": "Organization",
+            "name": "qinkangdeid","logo": {
+                    "@type": "ImageObject",
+                    "url": "https:\/\/qinkangdeid.github.io\/images\/avatar.png",
+                    "width":  664 ,
+                    "height":  664 
+                }},"author": {
+                "@type": "Person",
+                "name": "qinkangdeid"
+            },"description": ""
+    }
+    </script></head>
+    <body header-desktop="fixed" header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="qinkangdeid &#39;s blog"><span class="header-title-pre"><i class='far fa-kiss-wink-heart fa-fw'></i></span>qinkangdeid &#39;s blog</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 所有文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><a class="menu-item" href="/categories/documentation/"> 文档 </a><a class="menu-item" href="/about/"> 关于 </a><a class="menu-item" href="https://github.com/qinkangdeid" title="GitHub" rel="noopener noreffer" target="_blank"><i class='fab fa-github fa-fw'></i>  </a><span class="menu-item delimiter"></span><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="qinkangdeid &#39;s blog"><span class="header-title-pre"><i class='far fa-kiss-wink-heart fa-fw'></i></span>qinkangdeid &#39;s blog</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><a class="menu-item" href="/posts/" title="">所有文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a class="menu-item" href="/categories/documentation/" title="">文档</a><a class="menu-item" href="/about/" title="">关于</a><a class="menu-item" href="https://github.com/qinkangdeid" title="GitHub" rel="noopener noreffer" target="_blank"><i class='fab fa-github fa-fw'></i></a><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                <i class="fas fa-adjust fa-fw"></i>
+            </a></div>
+    </div>
+</header>
+<div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+</div>
+<main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">目录</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animated flipInX">OMV配置你的私有云盘--NextCloud</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>qinkangdeid</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/%E6%8A%98%E8%85%BE/"><i class="far fa-folder fa-fw"></i>折腾</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2019-02-18">2019-02-18</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 4491 字&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 9 分钟&nbsp;</div>
+        </div><div class="featured-image"><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/omv/nextcloud.png"
+        data-srcset="/images/omv/nextcloud.png, /images/omv/nextcloud.png 1.5x, /images/omv/nextcloud.png 2x"
+        data-sizes="auto"
+        alt="/images/omv/nextcloud.png"
+        title="/images/omv/nextcloud.png" /></div><div class="details toc" id="toc-static"  kept="">
+                <div class="details-summary toc-title">
+                    <span>目录</span>
+                    <span><i class="details-icon fas fa-angle-right"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#创建nextcloud配置共享文件夹">创建nextcloud配置共享文件夹</a>
+      <ul>
+        <li><a href="#nextcloud需要的配置文件夹">nextcloud需要的配置文件夹</a></li>
+      </ul>
+    </li>
+    <li><a href="#数据库准备">数据库准备</a></li>
+    <li><a href="#安装nextcloud">安装NextCloud</a></li>
+    <li><a href="#访问nextcloud">访问NextCloud</a></li>
+    <li><a href="#拓展安装方式">拓展安装方式</a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><p>[TOC]</p>
+<h1 id="omv配置你的私有云盘--nextcloud">OMV配置你的私有云盘&ndash;NextCloud</h1>
+<p>现在云盘厂家已经所剩无几，你能选的余地已经很少了，是时候找一个私有的云盘解决方案了。你绝对不是第一个有这个想法的人，所以很幸运，在开源的大世界里，已经有人做了出众的产品（Seafile、OwnCloud，NextCloud等等），NextCloud就是其中一款,它的很多东西，都可以来自云端，这也是它如此受欢迎的原因之一。</p>
+<p>目前最新版本是Nextcloud 15（15.0.6 ）。</p>
+<blockquote>
+<p>NextCloud 是一款开源网络硬盘系统。任何人都可以自由的获取 NextCloud 程序，在家庭或公司构建私有且免费的网络硬盘。它是完全由你用户控制的私有、安全且功能完整的文件同步与共享解决方案。</p>
+</blockquote>
+<blockquote>
+<p>下面的步骤需要使用到Docker,如果还没有安装的请先安装，<a href="https://www.jianshu.com/p/5b0eacc61527" target="_blank" rel="noopener noreffer">查看OMV配置Docker</a></p>
+</blockquote>
+<h2 id="创建nextcloud配置共享文件夹">创建nextcloud配置共享文件夹</h2>
+<p>安装docker容器时候<code>-v</code>参数有时候要映射宿主机的磁盘地址
+OMV的磁盘地址一般映射在 <code>/src</code>下面
+具体的硬盘信息可以到 <code>文件系统</code>查看</p>
+<p>比如我的硬盘</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320122422.png"
+        data-srcset="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320122422.png, https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320122422.png 1.5x, https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320122422.png 2x"
+        data-sizes="auto"
+        alt="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320122422.png"
+        title="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320122422.png" /></p>
+<p>在我的<code>/src</code>下的地址是：</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320122437.png"
+        data-srcset="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320122437.png, https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320122437.png 1.5x, https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320122437.png 2x"
+        data-sizes="auto"
+        alt="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320122437.png"
+        title="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320122437.png" /></p>
+<blockquote>
+<p>请记得你自己的磁盘位置  后面的命令需要替换成你自己的磁盘地址</p>
+</blockquote>
+<h3 id="nextcloud需要的配置文件夹">nextcloud需要的配置文件夹</h3>
+<p>omv提倡文件管理操作都能在WEB界面管理，所以这里使用创建共享文件夹和SMB的方式创建</p>
+<ul>
+<li>先创建共享文件夹
+<code>访问权限管理</code> -&gt; <code>共享文件夹</code>，文件夹尽量见名知意，所以这里就叫<code>nextcloud</code>
+<img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320122451.png"
+        data-srcset="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320122451.png, https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320122451.png 1.5x, https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320122451.png 2x"
+        data-sizes="auto"
+        alt="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320122451.png"
+        title="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320122451.png" /></li>
+</ul>
+<p>进入命令行可以查看创建的文件夹，验证文件夹是否已经创建好
+<img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320122507.png"
+        data-srcset="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320122507.png, https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320122507.png 1.5x, https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320122507.png 2x"
+        data-sizes="auto"
+        alt="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320122507.png"
+        title="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320122507.png" /></p>
+<p><strong>PS</strong>: OMV在创建了共享文件夹后，会将共享文件夹映射到一个<code>/sharedfolders</code>的文件路径下，所以你有两种访问你刚才创建的共享文件夹的路径，一个是定位到你磁盘的路径，一个是公共的<code>/sharedfolders</code>下的路径 这两个路径下的操作都是有效的 你可以随便选一个
+比如我刚才创建的nextcloud的共享文件夹，我要找到它，可以去两个路径下都能找到</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320122522.png"
+        data-srcset="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320122522.png, https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320122522.png 1.5x, https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320122522.png 2x"
+        data-sizes="auto"
+        alt="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320122522.png"
+        title="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320122522.png" /></p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320122536.png"
+        data-srcset="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320122536.png, https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320122536.png 1.5x, https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320122536.png 2x"
+        data-sizes="auto"
+        alt="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320122536.png"
+        title="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320122536.png" /></p>
+<ul>
+<li>设置nextcloud文件夹的SMB共享</li>
+</ul>
+<blockquote>
+<p>为了使用SMB用户创建nextcloud的其他配置子文件夹</p>
+</blockquote>
+<p>前往<code>服务</code> -&gt; <code>SMB/CIFS</code>, 设置SMB文件夹 方便我们在工作机上操作</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320122550.png"
+        data-srcset="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320122550.png, https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320122550.png 1.5x, https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320122550.png 2x"
+        data-sizes="auto"
+        alt="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320122550.png"
+        title="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320122550.png" /></p>
+<p>之后在你的工作机上使用SMB协议连接NAS</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320122604.png"
+        data-srcset="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320122604.png, https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320122604.png 1.5x, https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320122604.png 2x"
+        data-sizes="auto"
+        alt="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320122604.png"
+        title="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320122604.png" /></p>
+<p>连接上SMB以后，就可以像操作本地文件一样操作NAS文件了，直接鼠标右键点击创建文件夹操作即可创建一个文件夹，
+这里我预先准备一下几个子文件夹,用处如下：</p>
+<ul>
+<li><code>db</code> : nextcloud依赖的持久化数据的数据库</li>
+<li><code>html</code>:  nextcloud的资源配置文件夹</li>
+<li><code>data</code>: nextcloud的个人同步文件(你网盘的数据以后就存在这里了)
+如下
+<img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320122620.png"
+        data-srcset="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320122620.png, https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320122620.png 1.5x, https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320122620.png 2x"
+        data-sizes="auto"
+        alt="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320122620.png"
+        title="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320122620.png" /></li>
+</ul>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320122635.png"
+        data-srcset="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320122635.png, https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320122635.png 1.5x, https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320122635.png 2x"
+        data-sizes="auto"
+        alt="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320122635.png"
+        title="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320122635.png" /></p>
+<h2 id="数据库准备">数据库准备</h2>
+<p>默认情况下，NextCloud使用的是SQLite数据库进行数据存储，它仅适用于没有客户端同步的测试和轻量级单用户设置。当多用户、多设备、大数据量的时候，SQLite就不太合适了，NextCloud支持MySQL，MariaDB，Oracle 11g和PostgreSQL等多种数据库。并且推荐使用MySQL / MariaDB。所以为了一劳永逸，还是用MySQL代替吧，MariaDB是MySQL源代码的一个分支。这里使用MariaDB作为数据库支撑，</p>
+<ul>
+<li>
+<p>安装mariadb</p>
+<p>mariadb的安装还是使用docker进行， 打开你的终端，复制以下命令创建mariadb容器，即可。如果不想使用命令行安装，需要使用OMV自带的<code>docker-gui</code>界面操作也是可以的，将对应的<code>-*</code>的配置填到相应的界面框框内就可以了，类似的操作可以参考<a href="https://www.jianshu.com/p/ff4f3b34f6bc" target="_blank" rel="noopener noreffer">这里</a></p>
+</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">docker run -d --name db_nextcloud <span class="se">\
+</span><span class="se"></span>    -p 3307:3306 <span class="se">\
+</span><span class="se"></span>    -e <span class="nv">PUID</span><span class="o">=</span><span class="m">1000</span> <span class="se">\
+</span><span class="se"></span>    -e <span class="nv">PGID</span><span class="o">=</span><span class="m">100</span> <span class="se">\
+</span><span class="se"></span>    -e <span class="nv">MYSQL_ROOT_PASSWORD</span><span class="o">=</span><span class="m">123456</span> <span class="se">\
+</span><span class="se"></span>    -e <span class="nv">MYSQL_DATABASE</span><span class="o">=</span>nextcloud <span class="se">\
+</span><span class="se"></span>    -e <span class="nv">MYSQL_USER</span><span class="o">=</span>nextcloud <span class="se">\
+</span><span class="se"></span>    -e <span class="nv">MYSQL_PASSWORD</span><span class="o">=</span><span class="m">123456</span> <span class="se">\
+</span><span class="se"></span>    --restart<span class="o">=</span>unless-stopped <span class="se">\
+</span><span class="se"></span>    -v /sharedfolders/nextcloud/db:/var/lib/mysql <span class="se">\
+</span><span class="se"></span>     mariadb
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>命令参数释义(具体的参数释义可以查看<a href="https://hub.docker.com/_/mariadb" target="_blank" rel="noopener noreffer">镜像地址</a>)：</li>
+</ul>
+<blockquote>
+<p><code>-p 3307:3306</code>:  容器服务开放的端口,前者是宿主机的端口，后者是容器内服务的端口</p>
+<p><code>-e PUID、-e PGID</code>： 运行容器的用户的权限集id</p>
+<p><code>-e MYSQL_ROOT_PASSWORD</code>： 数据库root用户的密码</p>
+<p><code>-e MYSQL_DATABASE=nextcloud</code> ：创建一个名称为nextcloud的数据库</p>
+<p><code>-e MYSQL_USER</code>：创建一个名称为nextcloud的用户</p>
+<p><code>-e MYSQL_PASSWORD</code>：名称为nextcloud的用户的密码</p>
+<p><code>--restart=unless-stopped</code>：当容器停止时候重启容器</p>
+<p><code>-v</code>：数据卷绑定 前者是宿主机的地址,后者是容器机器的位置</p>
+<p>例如： <code>-v /sharedfolders/nextcloud/db:/var/lib/mysql</code> 把容器<code>/var/lib/mysql</code>的内容挂在到宿主机<code> /sharedfolders/nextcloud/db</code>的位置</p>
+</blockquote>
+<p>以下是我运行的日志</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">qinkangdeid@omv:~$ docker run -d --name db_nextcloud <span class="se">\
+</span><span class="se"></span>&gt;     -p 3307:3306 <span class="se">\
+</span><span class="se"></span>&gt;     -e <span class="nv">PUID</span><span class="o">=</span><span class="m">1000</span> <span class="se">\
+</span><span class="se"></span>&gt;     -e <span class="nv">PGID</span><span class="o">=</span><span class="m">100</span> <span class="se">\
+</span><span class="se"></span>&gt;     -e <span class="nv">MYSQL_ROOT_PASSWORD</span><span class="o">=</span><span class="m">123456</span> <span class="se">\
+</span><span class="se"></span>&gt;     -e <span class="nv">MYSQL_DATABASE</span><span class="o">=</span>nextcloud <span class="se">\
+</span><span class="se"></span>&gt;     -e <span class="nv">MYSQL_USER</span><span class="o">=</span>nextcloud <span class="se">\
+</span><span class="se"></span>&gt;     -e <span class="nv">MYSQL_PASSWORD</span><span class="o">=</span><span class="m">123456</span> <span class="se">\
+</span><span class="se"></span>&gt;     --restart<span class="o">=</span>unless-stopped <span class="se">\
+</span><span class="se"></span>&gt;     -v /sharedfolders/nextcloud/db:/var/lib/mysql <span class="se">\
+</span><span class="se"></span>&gt;      mariadb
+Unable to find image <span class="s1">&#39;mariadb:latest&#39;</span> locally
+latest: Pulling from library/mariadb
+38e2e6cd5626: Pull <span class="nb">complete</span>
+705054bc3f5b: Pull <span class="nb">complete</span>
+c7051e069564: Pull <span class="nb">complete</span>
+7308e914506c: Pull <span class="nb">complete</span>
+35e6984cb587: Pull <span class="nb">complete</span>
+3a173c4702b4: Pull <span class="nb">complete</span>
+efd003ff8e24: Pull <span class="nb">complete</span>
+ba5d30791443: Pull <span class="nb">complete</span>
+f3e943c9e01d: Pull <span class="nb">complete</span>
+e5243a434e4f: Pull <span class="nb">complete</span>
+910d8b012ee8: Pull <span class="nb">complete</span>
+1fb787f18e3d: Pull <span class="nb">complete</span>
+7a0cfbee5299: Pull <span class="nb">complete</span>
+6fa7c8911619: Pull <span class="nb">complete</span>
+Digest: sha256:eb6acf7f599f39c42582e11b1de3866c3934da84cc45190c0aac3e8d046e4053
+Status: Downloaded newer image <span class="k">for</span> mariadb:latest
+<span class="sb">`</span>1be6b4e5f24539e8fc40ca7036a567104b067072044f878a3f4d71104ee8ee9a<span class="sb">`</span>
+qinkangdeid@omv:~$ 
+</code></pre></td></tr></table>
+</div>
+</div><p>查看docker运行容器，看<code>NAMES</code>那一栏下面  有个<code>db_nextcloud</code>已经在运行，也能看到我们配置的端口</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">qinkangdeid@omv:~$ docker ps
+CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS              PORTS                    NAMES
+1be6b4e5f245        mariadb             <span class="s2">&#34;docker-entrypoint.s…&#34;</span>   <span class="m">14</span> seconds ago      Up <span class="m">8</span> seconds        0.0.0.0:3307-&gt;3306/tcp   db_nextcloud
+5b9d858e08ab        opengg/aria2        <span class="s2">&#34;/init.sh&#34;</span>               <span class="m">24</span> minutes ago      Up <span class="m">23</span> minutes       0.0.0.0:6800-&gt;6800/tcp   aria2
+</code></pre></td></tr></table>
+</div>
+</div><p>另一个方式使用<code>telnet</code>验证安装是否成功</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320122655.png"
+        data-srcset="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320122655.png, https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320122655.png 1.5x, https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320122655.png 2x"
+        data-sizes="auto"
+        alt="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320122655.png"
+        title="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320122655.png" /></p>
+<h2 id="安装nextcloud">安装NextCloud</h2>
+<p>NextCloud的安装也还简单，依然是使用docker，复制下面的命令到终端运行即可 ,记得<code>-v</code>的前部分是你宿主机的地址，如果不想使用命令行安装，需要使用OMV自带的<code>docker-gui</code>界面操作也是可以的，将对应的<code>-*</code>的配置填到相应的界面框框内就可以了，类似的操作可以参考<a href="https://www.jianshu.com/p/ff4f3b34f6bc" target="_blank" rel="noopener noreffer">这里</a></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">docker run -d --name nextcloud <span class="se">\
+</span><span class="se"></span>       -p 8088:80 <span class="se">\
+</span><span class="se"></span>       --restart<span class="o">=</span>unless-stopped <span class="se">\
+</span><span class="se"></span>       -v /sharedfolders/nextcloud/html:/var/www/html <span class="se">\
+</span><span class="se"></span>       -v /sharedfolders/nextcloud/data:/var/www/html/data <span class="se">\
+</span><span class="se"></span>       nextcloud
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>命令参数释义(具体的参数释义可以查看<a href="https://hub.docker.com/_/nextcloud/" target="_blank" rel="noopener noreffer">镜像地址</a>)：</li>
+</ul>
+<blockquote>
+<p><code>-p 8088:80</code>:  容器服务开放的端口,前者是宿主机的端口，后者是容器内服务的端口</p>
+<p><code>--restart=unless-stopped</code>：当容器停止时候重启容器</p>
+<p><code>-v</code>：数据卷绑定 前者是宿主机的地址,后者是容器机器的位置</p>
+<p>Nextcloud安装以及数据库之外的所有数据（文件上载等）都存储在容器地址<code>/var/www/html</code>中，要想持久化你的数据，不通过nextCloud也可以查看的话，应当映射到宿主机的某个位置上</p>
+<p>Nextcloud的卷配置还是挺多的，例如配置(config)、数据(data)、主题(themes)等</p>
+<ul>
+<li>nextcloud的一些卷地址：</li>
+<li><code>/var/www/html</code> 更新所需的主文件夹</li>
+<li><code>/var/www/html/custom_apps</code>你自己手动安装的应用位置</li>
+<li><code>/var/www/html/config</code> 本地配置文件位置</li>
+<li><code>/var/www/html/data</code> 你的网盘数据存放的位置</li>
+<li><code>/var/www/html/themes/&lt;YOU_CUSTOM_THEME&gt;</code> 主题文件位置</li>
+</ul>
+<p>以上卷映射我这里只把data单独抽出来了，其他的配置全部默认放在<code>/var/www/html</code>映射的位置里</p>
+</blockquote>
+<p>下面是我的运行日志</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">qinkangdeid@omv:~$ docker run -d --name nextcloud <span class="se">\
+</span><span class="se"></span>&gt;        -p 8088:80 <span class="se">\
+</span><span class="se"></span>&gt;        --restart<span class="o">=</span>unless-stopped <span class="se">\
+</span><span class="se"></span>&gt;        -v /sharedfolders/nextcloud/html:/var/www/html <span class="se">\
+</span><span class="se"></span>&gt;        -v /sharedfolders/nextcloud/data:/var/www/html/data <span class="se">\
+</span><span class="se"></span>&gt;        nextcloud
+Unable to find image <span class="s1">&#39;nextcloud:latest&#39;</span> locally
+latest: Pulling from library/nextcloud
+5e6ec7f28fb7: Pull <span class="nb">complete</span>
+cf165947b5b7: Pull <span class="nb">complete</span>
+7bd37682846d: Extracting <span class="o">[===========================================</span>&gt;       <span class="o">]</span>  58.49MB/67.44MB
+7bd37682846d: Pull <span class="nb">complete</span>
+99daf8e838e1: Pull <span class="nb">complete</span>
+ae320713efba: Pull <span class="nb">complete</span>
+ebcb99c48d8c: Pull <span class="nb">complete</span>
+9867e71b4ab6: Pull <span class="nb">complete</span>
+936eb418164a: Pull <span class="nb">complete</span>
+5d9617dfb66b: Pull <span class="nb">complete</span>
+8dd7afaae109: Pull <span class="nb">complete</span>
+8f207844da7e: Pull <span class="nb">complete</span>
+adb3ae5e4987: Pull <span class="nb">complete</span>
+44d7d07029db: Pull <span class="nb">complete</span>
+fb91064652b0: Pull <span class="nb">complete</span>
+50923e16d552: Pull <span class="nb">complete</span>
+a7cb9c70c5d2: Pull <span class="nb">complete</span>
+728e578e40fa: Pull <span class="nb">complete</span>
+4c3163d09df1: Pull <span class="nb">complete</span>
+842c4700643d: Downloading <span class="o">[===========================================</span>&gt;       <span class="o">]</span>  35.98MB/41.57MB
+842c4700643d: Pull <span class="nb">complete</span>
+cc1964f4bb3e: Pull <span class="nb">complete</span>
+125e01596295: Pull <span class="nb">complete</span>
+Digest: sha256:a2f2bd57fcfd92b3b6c23b6f34f65d59c9b25e7cc883b1ac67fff01229325692
+Status: Downloaded newer image <span class="k">for</span> nextcloud:latest
+b2b8cb3a61967ba08cb64490c6c8d2a173882560ae22fb0a6a45f895dea36912
+</code></pre></td></tr></table>
+</div>
+</div><p>例行惯例，查看容器运行：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">qinkangdeid@omv:~$ docker ps
+CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS              PORTS                    NAMES
+b2b8cb3a6196        nextcloud           <span class="s2">&#34;/entrypoint.sh apac…&#34;</span>   <span class="m">42</span> seconds ago      Up <span class="m">38</span> seconds       0.0.0.0:8088-&gt;80/tcp     nextcloud
+cb81622828c1        mariadb             <span class="s2">&#34;docker-entrypoint.s…&#34;</span>   <span class="m">7</span> minutes ago       Up <span class="m">5</span> minutes        0.0.0.0:3307-&gt;3306/tcp   db_nextcloud
+5b9d858e08ab        opengg/aria2        <span class="s2">&#34;/init.sh&#34;</span>               About an hour ago   Up <span class="m">5</span> minutes        0.0.0.0:6800-&gt;6800/tcp   aria2
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="访问nextcloud">访问NextCloud</h2>
+<p>我把nextcloud的服务端口映射到了宿主机的8088端口上，nextcloud启动后，浏览器输入<code>http://你的IP:8088</code>即可访问nextcloud了。</p>
+<p>刚开始的界面如下：</p>
+<ul>
+<li>
+<p>第一项配置是配置日后访问nextcloud的一个管理员用户名和密码</p>
+</li>
+<li>
+<p>第二项是数据目录，这个我们在运行容器的时候已经指定了位置，所以这里不用动</p>
+</li>
+<li>
+<p>第三项就是配置外置数据库的连接信息了，将之前我们创建<code>mariadb</code>的信息填写进去，其实这里也可以在安装nextcloud的时候将之前的mariadb容器连接进去，这里就手动填写了。要注意数据库的服务端口如果宿主机和容器端口映射的不一样的话，这里要写宿主机的端口，例如现在我的mariadb容器的服务端口3306映射到了宿主机的3307端口上了，所以这里使用的端口为3307。</p>
+</li>
+</ul>
+<p>所有信息填写完成后，点击安装完成，这一步骤会比较的耗时间，nextcloud需要创建数据库表和一些初始化配置信息</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320122713.png"
+        data-srcset="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320122713.png, https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320122713.png 1.5x, https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320122713.png 2x"
+        data-sizes="auto"
+        alt="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320122713.png"
+        title="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320122713.png" /></p>
+<p>点击安装完成
+<img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320122730.png"
+        data-srcset="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320122730.png, https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320122730.png 1.5x, https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320122730.png 2x"
+        data-sizes="auto"
+        alt="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320122730.png"
+        title="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320122730.png" />
+安装完成后，会自动显示以下界面</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320122747.png"
+        data-srcset="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320122747.png, https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320122747.png 1.5x, https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320122747.png 2x"
+        data-sizes="auto"
+        alt="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320122747.png"
+        title="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320122747.png" /></p>
+<p>里面会有一些默认的示例文件</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320122805.png"
+        data-srcset="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320122805.png, https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320122805.png 1.5x, https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320122805.png 2x"
+        data-sizes="auto"
+        alt="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320122805.png"
+        title="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320122805.png" /></p>
+<p>至此nextcloudu已经安装完成，你可以继续探索NextCloud所拥有的功能。</p>
+<h2 id="拓展安装方式">拓展安装方式</h2>
+<blockquote>
+<p>PS: 上面的安装方式需要在第一次启动访问nextcloud的时候配置数据库连接、数据卷地址，下面的方式可以减少这个步骤
+也就是可以减少下面这张图的配置情况：</p>
+</blockquote>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320122821.png"
+        data-srcset="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320122821.png, https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320122821.png 1.5x, https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320122821.png 2x"
+        data-sizes="auto"
+        alt="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320122821.png"
+        title="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320122821.png" /></p>
+<blockquote>
+<p>docker可以使用 &ndash;link 连接另外一个容器的配置  nextcloud也支持<code>通过环境变量自动配置</code>
+可以在首次运行nextcloud容器时预先配置安装页面上询问的所有内容。要启用自动配置，
+可以通过以下环境变量设置数据库连接。但是只能使用一种数据库类型！</p>
+</blockquote>
+<p>Nextcloud目前所支持的环境变量自动配置如下：</p>
+<ul>
+<li>
+<p>配置数据库的环境变量</p>
+<ul>
+<li>
+<p>针对选用SQLITE_DATABASE数据库的参数:</p>
+<ul>
+<li>SQLITE_DATABASE:  使用SQLite数据库时候的数据库名称(我们不适用这个数据库所以不用带这个参数)</li>
+</ul>
+</li>
+<li>
+<p>针对选用MYSQL/MariaDB数据库的参数:</p>
+<ul>
+<li><code>MYSQL_DATABASE</code>: 要使用的数据库的名称 在这里和之前创建的<code>mariadb容器</code> 的数据库一直<code>db_nextcloud</code></li>
+<li><code>MYSQL_USER</code>:数据库用户名</li>
+<li><code>MYSQL_PASSWORD</code> 数据库用户名密码</li>
+<li><code>MYSQL_HOST</code> : 配置的数据库容器的名称<code>docker run -d --name db_nextcloud </code>的<code>--name</code>参数指定的名称，也就是<code>db_nextcloud</code></li>
+</ul>
+</li>
+<li>
+<p>针对选用PostgreSQL数据库的参数:</p>
+<ul>
+<li><code>POSTGRES_DB</code> :postgres数据库的名称</li>
+<li><code>POSTGRES_USER</code> :postgres数据库用户名</li>
+<li><code>POSTGRES_PASSWORD</code> postgres数据库用户的密码(对应上面用户名的密码)</li>
+<li><code>POSTGRES_HOST</code>:配置的数据库容器的名称</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>配置Nextcloud 管理员用户密码的环境变量</p>
+<ul>
+<li><code>NEXTCLOUD_ADMIN_USER</code> :管理员用户名</li>
+<li><code>NEXTCLOUD_ADMIN_PASSWORD</code>:管理员密码</li>
+</ul>
+</li>
+<li>
+<p>配置Nextcloud 数据文件地址和表名前缀的环境变量</p>
+<ul>
+<li><code>NEXTCLOUD_DATA_DIR</code> : nextcloud数据存放的位置(默认路径是: <code>/var/www/html/data</code>) 这个不设我们还可以使用<code>-v</code>参数来映射</li>
+<li><code>NEXTCLOUD_TABLE_PREFIX</code>: nextcloud依赖的数据库表表名前缀 (默认是: <em>&quot;&quot;</em>) 可选操作 一般也不会设啦</li>
+</ul>
+</li>
+</ul>
+<p>所以创建<code>nextcloud容器</code>的方式就稍稍有些变化了，可以根据上面的环境变量自由添加，环境变量使用<code>-e</code>追加，我这里只配置数据库的环境变量，如下命令所示：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">docker run -d --name nextcloud <span class="se">\
+</span><span class="se"></span>       --link db_nextcloud:db_nextcloud <span class="se">\
+</span><span class="se"></span>       -p 8088:80 <span class="se">\
+</span><span class="se"></span>       -p 4433:443 <span class="se">\
+</span><span class="se"></span>       -e <span class="nv">PUID</span><span class="o">=</span><span class="m">1000</span> <span class="se">\
+</span><span class="se"></span>       -e <span class="nv">PGID</span><span class="o">=</span><span class="m">100</span> <span class="se">\
+</span><span class="se"></span>       -v /sharedfolders/nextcloud/html:/var/www/html <span class="se">\
+</span><span class="se"></span>       -v /sharedfolders/nextcloud/data:/var/www/html/data <span class="se">\
+</span><span class="se"></span>       -e <span class="nv">MYSQL_DATABASE</span><span class="o">=</span>nextcloud <span class="se">\
+</span><span class="se"></span>       -e <span class="nv">MYSQL_USER</span><span class="o">=</span>nextcloud <span class="se">\
+</span><span class="se"></span>       -e <span class="nv">MYSQL_PASSWORD</span><span class="o">=</span><span class="m">123456</span> <span class="se">\
+</span><span class="se"></span>       -e <span class="nv">MYSQL_HOST</span><span class="o">=</span>db_nextcloud <span class="se">\
+</span><span class="se"></span>       --restart<span class="o">=</span>unless-stopped <span class="se">\
+</span><span class="se"></span>       nextcloud
+</code></pre></td></tr></table>
+</div>
+</div><p>我的执行日志：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">root@omv:/sharedfolders/nextcloud# docker run -d --name nextcloud <span class="se">\
+</span><span class="se"></span>&gt;        --link db_nextcloud:db_nextcloud <span class="se">\
+</span><span class="se"></span>&gt;        -p 8088:80 <span class="se">\
+</span><span class="se"></span>&gt;        -e <span class="nv">PUID</span><span class="o">=</span><span class="m">1000</span> <span class="se">\
+</span><span class="se"></span>&gt;        -e <span class="nv">PGID</span><span class="o">=</span><span class="m">100</span> <span class="se">\
+</span><span class="se"></span>&gt;        -v /sharedfolders/nextcloud/html:/var/www/html <span class="se">\
+</span><span class="se"></span>&gt;        -v /sharedfolders/nextcloud/data:/var/www/html/data <span class="se">\
+</span><span class="se"></span>&gt;        -e <span class="nv">MYSQL_DATABASE</span><span class="o">=</span>nextcloud <span class="se">\
+</span><span class="se"></span>&gt;        -e <span class="nv">MYSQL_USER</span><span class="o">=</span>nextcloud <span class="se">\
+</span><span class="se"></span>&gt;        -e <span class="nv">MYSQL_PASSWORD</span><span class="o">=</span><span class="m">123456</span> <span class="se">\
+</span><span class="se"></span>&gt;        -e <span class="nv">MYSQL_HOST</span><span class="o">=</span>db_nextcloud <span class="se">\
+</span><span class="se"></span>&gt;        --restart<span class="o">=</span>unless-stopped <span class="se">\
+</span><span class="se"></span>&gt;        nextcloud
+Unable to find image <span class="s1">&#39;nextcloud:latest&#39;</span> locally
+latest: Pulling from library/nextcloud
+27833a3ba0a5: Already exists
+2d79f6773a3c: Already exists
+f5dd9a448b82: Already exists
+95719e57e42b: Already exists
+cc75e951030f: Already exists
+78873f480bce: Already exists
+1b14116a29a2: Already exists
+887fc426d9b4: Pull <span class="nb">complete</span>
+e8a2a7e68e47: Pull <span class="nb">complete</span>
+44116bd4b499: Pull <span class="nb">complete</span>
+5a7ed133cf7c: Pull <span class="nb">complete</span>
+a0cc2e7ce3b9: Pull <span class="nb">complete</span>
+3ea943f2a6e6: Pull <span class="nb">complete</span>
+dc6fe404fa96: Pull <span class="nb">complete</span>
+2970a87ebdd8: Pull <span class="nb">complete</span>
+632923a6d419: Pull <span class="nb">complete</span>
+78f88b7ec6fe: Pull <span class="nb">complete</span>
+a62deb12226c: Pull <span class="nb">complete</span>
+30d2885ecc94: Pull <span class="nb">complete</span>
+5c72c2211abe: Pull <span class="nb">complete</span>
+Digest: sha256:e4c59de7d564a7cec680d32ebed64bb7a7c53859d1c9dd6ef21912183719b203
+Status: Downloaded newer image <span class="k">for</span> nextcloud:latest
+8aa333d93a38589c758efd44db429b28e65301205516d940c5e772212ce09b77
+root@omv:/sharedfolders/nextcloud#
+
+</code></pre></td></tr></table>
+</div>
+</div><p>之后nextcloud启动，第一次访问nextcloud就出现如下画面：
+<img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320122841.png"
+        data-srcset="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320122841.png, https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320122841.png 1.5x, https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320122841.png 2x"
+        data-sizes="auto"
+        alt="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320122841.png"
+        title="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320122841.png" /></p>
+<p>数据库和数据卷的配置没了，只需要创建一个管理员账户即可
+<img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320122858.png"
+        data-srcset="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320122858.png, https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320122858.png 1.5x, https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320122858.png 2x"
+        data-sizes="auto"
+        alt="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320122858.png"
+        title="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320122858.png" /></p>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>更新于 2019-02-18</span>
+            </div>
+            <div class="post-info-license"></div>
+        </div>
+        <div class="post-info-line">
+            <div class="post-info-md"><span>
+                            <a class="link-to-markdown" href="/omv-install-nextcloud/index.md" target="_blank">阅读原始文档</a>
+                        </span></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="https://qinkangdeid.github.io/omv-install-nextcloud/" data-title="OMV配置你的私有云盘--NextCloud" data-image="/images/omv/nextcloud.png" data-ralateuid="qinkangdeid"><i class="fab fa-weibo fa-fw"></i></a><a href="javascript:void(0);" title="分享到 百度" data-sharer="baidu" data-url="https://qinkangdeid.github.io/omv-install-nextcloud/" data-title="OMV配置你的私有云盘--NextCloud"><i data-svg-src="https://cdn.jsdelivr.net/npm/simple-icons@2.14.0/icons/baidu.svg"></i></a><a href="javascript:void(0);" title="分享到 Evernote" data-sharer="evernote" data-url="https://qinkangdeid.github.io/omv-install-nextcloud/" data-title="OMV配置你的私有云盘--NextCloud"><i class="fab fa-evernote fa-fw"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/omv/">OMV</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/omv-install-jellyfin/" class="prev" rel="prev" title="OMV安装jellyfin"><i class="fas fa-angle-left fa-fw"></i>OMV安装jellyfin</a>
+            <a href="/omv-nextcloud-config-smtp/" class="next" rel="next" title="Nextcloud配置SMTP邮件通知">Nextcloud配置SMTP邮件通知<i class="fas fa-angle-right fa-fw"></i></a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.74.3">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw"></i> LoveIt</a>
+                </div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2019 - 2020</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">qinkangdeid</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="回到顶部">
+                <i class="fas fa-arrow-up fa-fw"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="查看评论">
+                <i class="fas fa-comment fa-fw"></i>
+            </a>
+        </div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery.js@1.2.0/dist/css/lightgallery.min.css"><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/smooth-scroll@16.1.3/dist/smooth-scroll.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.2.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lightgallery.js@1.2.0/dist/js/lightgallery.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lg-thumbnail.js@1.2.0/dist/lg-thumbnail.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lg-zoom.js@1.2.0/dist/lg-zoom.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sharer.js@0.4.0/sharer.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":10},"comment":{},"lightGallery":{"actualSize":false,"exThumbImage":"data-thumbnail","hideBarsDelay":2000,"selector":".lightgallery","speed":400,"thumbContHeight":80,"thumbWidth":80,"thumbnail":true}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

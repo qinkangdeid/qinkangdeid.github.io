@@ -1,0 +1,98 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>OMV - 标签 - qinkangdeid &#39;s blog</title>
+        <link>https://qinkangdeid.github.io/tags/omv/</link>
+        <description>OMV - 标签 - qinkangdeid &#39;s blog</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>qinkangdeidd@gmail.com (qinkangdeid)</managingEditor>
+            <webMaster>qinkangdeidd@gmail.com (qinkangdeid)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Thu, 21 Feb 2019 19:49:59 &#43;0800</lastBuildDate><atom:link href="https://qinkangdeid.github.io/tags/omv/" rel="self" type="application/rss+xml" /><item>
+    <title>Rock64安装OpenMediaVault</title>
+    <link>https://qinkangdeid.github.io/rock64-install-omv/</link>
+    <pubDate>Thu, 21 Feb 2019 19:49:59 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>https://qinkangdeid.github.io/rock64-install-omv/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/images/omv/rock64.png" referrerpolicy="no-referrer">
+            </div>血来潮就买了一块rock64, 大小就信用卡大小 还可以刷挺多ROM的，这货有千兆网口，关键还有一个USB3口，比树莓派底子好，拿来做简易NAS]]></description>
+</item><item>
+    <title>OMV-添加https保护</title>
+    <link>https://qinkangdeid.github.io/omv-add-https/</link>
+    <pubDate>Wed, 20 Feb 2019 19:49:59 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>https://qinkangdeid.github.io/omv-add-https/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/images/omv/https.jpg" referrerpolicy="no-referrer">
+            </div>[TOC] HTTPS的优点 HTTPS具有更好的加密性能，避免用户信息泄露；﻿﻿ HTTPS复杂的传输方式，降低网站被劫持的风险；﻿﻿ 搜索引擎已经全面支]]></description>
+</item><item>
+    <title>OMV-DDNS访问</title>
+    <link>https://qinkangdeid.github.io/omv-remote-access-ddns/</link>
+    <pubDate>Tue, 19 Feb 2019 19:49:59 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>https://qinkangdeid.github.io/omv-remote-access-ddns/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/images/omv/remote-access-2.png" referrerpolicy="no-referrer">
+            </div>远程访问(公网IP-DDNS方式) [TOC] 宽带有公网IP的前提下，使用DDNS的方式相比于内网穿透的方式要更稳定，不需要依赖服务端的带宽和处理能力]]></description>
+</item><item>
+    <title>OMV内网穿透访问</title>
+    <link>https://qinkangdeid.github.io/omv-remote-access/</link>
+    <pubDate>Tue, 19 Feb 2019 19:49:59 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>https://qinkangdeid.github.io/omv-remote-access/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/images/omv/remote-access.png" referrerpolicy="no-referrer">
+            </div>我们将数据放在了NAS里，目前只能是在家通过局域网才能访问数据，但有时候我们不在家里，出门在外也想能够访问家里的数据呢？你可能想： 在工作机上]]></description>
+</item><item>
+    <title>Nextcloud配置SMTP邮件通知</title>
+    <link>https://qinkangdeid.github.io/omv-nextcloud-config-smtp/</link>
+    <pubDate>Mon, 18 Feb 2019 19:49:59 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>https://qinkangdeid.github.io/omv-nextcloud-config-smtp/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/images/omv/nextcloud.png" referrerpolicy="no-referrer">
+            </div>Nextcloud配置SMTP邮件通知 参考地址：https://www.techrepublic.com/article/how-to-co]]></description>
+</item><item>
+    <title>OMV配置你的私有云盘--NextCloud</title>
+    <link>https://qinkangdeid.github.io/omv-install-nextcloud/</link>
+    <pubDate>Mon, 18 Feb 2019 19:49:59 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>https://qinkangdeid.github.io/omv-install-nextcloud/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/images/omv/nextcloud.png" referrerpolicy="no-referrer">
+            </div>[TOC] OMV配置你的私有云盘&ndash;NextCloud 现在云盘厂家已经所剩无几，你能选的余地已经很少了，是时候找一个私有的云盘解决方案了。]]></description>
+</item><item>
+    <title>OMV安装jellyfin</title>
+    <link>https://qinkangdeid.github.io/omv-install-jellyfin/</link>
+    <pubDate>Sun, 17 Feb 2019 19:49:59 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>https://qinkangdeid.github.io/omv-install-jellyfin/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/images/omv/jellyfin.png" referrerpolicy="no-referrer">
+            </div>OMV提供了一个Docker的可视化插件 方便用户进行图形化配置docker容器 如果你还没有在OMV开启Docker,请参照这里开启 进行Doc]]></description>
+</item><item>
+    <title>OMV配置Docker</title>
+    <link>https://qinkangdeid.github.io/omv-install-docker/</link>
+    <pubDate>Sat, 16 Feb 2019 19:49:59 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>https://qinkangdeid.github.io/omv-install-docker/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/images/omv/docker.png" referrerpolicy="no-referrer">
+            </div>docker属于omv拓展(omv-extras)插件，如果没有安装拓展包是搜索不到的，如果你还没有安装omv-extras的话，请先安装O]]></description>
+</item><item>
+    <title>OMV安装可道云(kodexplorer)</title>
+    <link>https://qinkangdeid.github.io/omv-install-kodexplorer/</link>
+    <pubDate>Fri, 15 Feb 2019 19:49:59 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>https://qinkangdeid.github.io/omv-install-kodexplorer/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/images/omv/kod.png" referrerpolicy="no-referrer">
+            </div>[TOC] 可道云是一款云端文档管理软件，开源的，基于PHP开发。 为了方便管理，我这里特地新建了一个共享文件夹，专门存放应用的配置文件,我这里选择创建]]></description>
+</item><item>
+    <title>OMV配置Aria2</title>
+    <link>https://qinkangdeid.github.io/omv-install-aria2/</link>
+    <pubDate>Wed, 13 Feb 2019 19:49:59 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>https://qinkangdeid.github.io/omv-install-aria2/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/images/omv/aria2.png" referrerpolicy="no-referrer">
+            </div>[TOC] Aria2是一款非常棒的多线程下载工具，最最关键的是，它支持百度的下载，相信这一定是广大网友的福音 下面的步骤需要使用到Docker,如果还]]></description>
+</item></channel>
+</rss>

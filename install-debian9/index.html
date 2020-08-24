@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+        <title>安装Debian9 - qinkangdeid &#39;s blog</title><meta name="Description" content="关于 qinkangdeid &#39;s blog "><meta property="og:title" content="安装Debian9" />
+<meta property="og:description" content="[TOC] 参考链接：https://www.pcsuggest.com/debian-minimal-install-guide/ 我的硬件 主板：华擎" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://qinkangdeid.github.io/install-debian9/" />
+<meta property="og:image" content="https://qinkangdeid.github.io/logo.png"/>
+<meta property="article:published_time" content="2019-02-10T19:46:59+08:00" />
+<meta property="article:modified_time" content="2019-02-10T19:46:59+08:00" />
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://qinkangdeid.github.io/logo.png"/>
+
+<meta name="twitter:title" content="安装Debian9"/>
+<meta name="twitter:description" content="[TOC] 参考链接：https://www.pcsuggest.com/debian-minimal-install-guide/ 我的硬件 主板：华擎"/>
+<meta name="application-name" content="qinkangdeid">
+<meta name="apple-mobile-web-app-title" content="qinkangdeid"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://qinkangdeid.github.io/install-debian9/" /><link rel="prev" href="https://qinkangdeid.github.io/install/" /><link rel="next" href="https://qinkangdeid.github.io/omv-install-flashmemory/" /><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/normalize.css@8.0.1/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.13.0/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.7.2/animate.min.css"><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "安装Debian9",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/qinkangdeid.github.io\/install-debian9\/"
+        },"image": [{
+                            "@type": "ImageObject",
+                            "url": "https:\/\/qinkangdeid.github.io\/images\/Apple-Devices-Preview.png",
+                            "width":  3200 ,
+                            "height":  2048 
+                        }],"genre": "posts","keywords": "OMV","wordcount":  1427 ,
+        "url": "https:\/\/qinkangdeid.github.io\/install-debian9\/","datePublished": "2019-02-10T19:46:59+08:00","dateModified": "2019-02-10T19:46:59+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+            "@type": "Organization",
+            "name": "qinkangdeid","logo": {
+                    "@type": "ImageObject",
+                    "url": "https:\/\/qinkangdeid.github.io\/images\/avatar.png",
+                    "width":  664 ,
+                    "height":  664 
+                }},"author": {
+                "@type": "Person",
+                "name": "qinkangdeid"
+            },"description": ""
+    }
+    </script></head>
+    <body header-desktop="fixed" header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="qinkangdeid &#39;s blog"><span class="header-title-pre"><i class='far fa-kiss-wink-heart fa-fw'></i></span>qinkangdeid &#39;s blog</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 所有文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><a class="menu-item" href="/categories/documentation/"> 文档 </a><a class="menu-item" href="/about/"> 关于 </a><a class="menu-item" href="https://github.com/qinkangdeid" title="GitHub" rel="noopener noreffer" target="_blank"><i class='fab fa-github fa-fw'></i>  </a><span class="menu-item delimiter"></span><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="qinkangdeid &#39;s blog"><span class="header-title-pre"><i class='far fa-kiss-wink-heart fa-fw'></i></span>qinkangdeid &#39;s blog</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><a class="menu-item" href="/posts/" title="">所有文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a class="menu-item" href="/categories/documentation/" title="">文档</a><a class="menu-item" href="/about/" title="">关于</a><a class="menu-item" href="https://github.com/qinkangdeid" title="GitHub" rel="noopener noreffer" target="_blank"><i class='fab fa-github fa-fw'></i></a><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                <i class="fas fa-adjust fa-fw"></i>
+            </a></div>
+    </div>
+</header>
+<div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+</div>
+<main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">目录</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animated flipInX">安装Debian9</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>qinkangdeid</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/%E6%8A%98%E8%85%BE/"><i class="far fa-folder fa-fw"></i>折腾</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2019-02-10">2019-02-10</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 1427 字&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 3 分钟&nbsp;</div>
+        </div><div class="featured-image"><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/omv/debian.jpg"
+        data-srcset="/images/omv/debian.jpg, /images/omv/debian.jpg 1.5x, /images/omv/debian.jpg 2x"
+        data-sizes="auto"
+        alt="/images/omv/debian.jpg"
+        title="/images/omv/debian.jpg" /></div><div class="details toc" id="toc-static"  kept="">
+                <div class="details-summary toc-title">
+                    <span>目录</span>
+                    <span><i class="details-icon fas fa-angle-right"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#我的硬件">我的硬件</a></li>
+    <li><a href="#前期准备">前期准备</a></li>
+    <li><a href="#烧录启动u盘">烧录启动U盘</a></li>
+    <li><a href="#安装debian">安装Debian</a></li>
+    <li><a href="#安装完后的操作">安装完后的操作</a></li>
+    <li><a href="#查看你机器的ip">查看你机器的IP</a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><p>[TOC]</p>
+<blockquote>
+<p>参考链接：https://www.pcsuggest.com/debian-minimal-install-guide/</p>
+</blockquote>
+<h2 id="我的硬件">我的硬件</h2>
+<ul>
+<li>主板：华擎J4105-ITX(只支持UEFI)</li>
+<li>内存：8G</li>
+<li>系统盘：32G 闪迪酷豆U盘</li>
+<li>数据盘：2t希捷酷狼</li>
+</ul>
+<h2 id="前期准备">前期准备</h2>
+<ul>
+<li>debian镜像</li>
+<li>一个8G以上U盘用于烧录启动U盘</li>
+<li>安装系统盘（可以是任何闪存介质：U盘、HDD、SSD）</li>
+</ul>
+<h2 id="烧录启动u盘">烧录启动U盘</h2>
+<p>安装前需要制作启动U盘，现在Debian的版本是9.8：<a href="https://ftp.acc.umu.se/debian-cd/current/amd64/iso-cd/" target="_blank" rel="noopener noreffer">下载点我</a>
+安装包在最下面:<code>debian-9.8.0-amd64-netinst.iso</code>
+烧录软件我使用<code>Etcher</code>进行操作，以前一直使用<code>refus</code>,觉得已经很简单了，自从找到了<code>Etcher</code>,才发现还有更简单的，而且长得也很漂亮，那果断换它了。<a href="https://www.balena.io/etcher/" target="_blank" rel="noopener noreffer">点击这里下载</a></p>
+<p>基本只需要点三次就可以完成：</p>
+<ul>
+<li>选取烧录镜像</li>
+</ul>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="http://upload-images.jianshu.io/upload_images/3647768-8156df0b83288a27.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240"
+        data-srcset="http://upload-images.jianshu.io/upload_images/3647768-8156df0b83288a27.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240, http://upload-images.jianshu.io/upload_images/3647768-8156df0b83288a27.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240 1.5x, http://upload-images.jianshu.io/upload_images/3647768-8156df0b83288a27.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240 2x"
+        data-sizes="auto"
+        alt="http://upload-images.jianshu.io/upload_images/3647768-8156df0b83288a27.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240"
+        title="image-20190202182413643" /></p>
+<ul>
+<li>选择要烧录的U盘</li>
+</ul>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="http://upload-images.jianshu.io/upload_images/3647768-7051384b2a3b6d38.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240"
+        data-srcset="http://upload-images.jianshu.io/upload_images/3647768-7051384b2a3b6d38.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240, http://upload-images.jianshu.io/upload_images/3647768-7051384b2a3b6d38.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240 1.5x, http://upload-images.jianshu.io/upload_images/3647768-7051384b2a3b6d38.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240 2x"
+        data-sizes="auto"
+        alt="http://upload-images.jianshu.io/upload_images/3647768-7051384b2a3b6d38.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240"
+        title="image-20190202214618084" /></p>
+<ul>
+<li>点击烧录</li>
+</ul>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="http://upload-images.jianshu.io/upload_images/3647768-13c6139d320850d9.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240"
+        data-srcset="http://upload-images.jianshu.io/upload_images/3647768-13c6139d320850d9.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240, http://upload-images.jianshu.io/upload_images/3647768-13c6139d320850d9.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240 1.5x, http://upload-images.jianshu.io/upload_images/3647768-13c6139d320850d9.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240 2x"
+        data-sizes="auto"
+        alt="http://upload-images.jianshu.io/upload_images/3647768-13c6139d320850d9.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240"
+        title="image-20190202214634718" /></p>
+<p>之后看到烧录进度条</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="http://upload-images.jianshu.io/upload_images/3647768-693971dbd1b89763.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240"
+        data-srcset="http://upload-images.jianshu.io/upload_images/3647768-693971dbd1b89763.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240, http://upload-images.jianshu.io/upload_images/3647768-693971dbd1b89763.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240 1.5x, http://upload-images.jianshu.io/upload_images/3647768-693971dbd1b89763.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240 2x"
+        data-sizes="auto"
+        alt="http://upload-images.jianshu.io/upload_images/3647768-693971dbd1b89763.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240"
+        title="image-20190202214703619" /></p>
+<p>烧录成功，就是这么简单！</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="http://upload-images.jianshu.io/upload_images/3647768-d0caa2162df92886.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240"
+        data-srcset="http://upload-images.jianshu.io/upload_images/3647768-d0caa2162df92886.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240, http://upload-images.jianshu.io/upload_images/3647768-d0caa2162df92886.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240 1.5x, http://upload-images.jianshu.io/upload_images/3647768-d0caa2162df92886.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240 2x"
+        data-sizes="auto"
+        alt="http://upload-images.jianshu.io/upload_images/3647768-d0caa2162df92886.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240"
+        title="image-20190202214718947" /></p>
+<h2 id="安装debian">安装Debian</h2>
+<blockquote>
+<p>将烧录好的U盘插到你的机器USB上，开机启动的时候选择U盘启动，之后就可以看到安装向导界面了</p>
+</blockquote>
+<ol>
+<li>选择<code>图形安装</code></li>
+</ol>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="http://upload-images.jianshu.io/upload_images/3647768-3eff291fc67334c2.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240"
+        data-srcset="http://upload-images.jianshu.io/upload_images/3647768-3eff291fc67334c2.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240, http://upload-images.jianshu.io/upload_images/3647768-3eff291fc67334c2.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240 1.5x, http://upload-images.jianshu.io/upload_images/3647768-3eff291fc67334c2.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240 2x"
+        data-sizes="auto"
+        alt="http://upload-images.jianshu.io/upload_images/3647768-3eff291fc67334c2.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240"
+        title="image-20190202215157893" /></p>
+<ol start="2">
+<li>选择开机语言</li>
+</ol>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="http://upload-images.jianshu.io/upload_images/3647768-760d53e593bf7a07.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240"
+        data-srcset="http://upload-images.jianshu.io/upload_images/3647768-760d53e593bf7a07.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240, http://upload-images.jianshu.io/upload_images/3647768-760d53e593bf7a07.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240 1.5x, http://upload-images.jianshu.io/upload_images/3647768-760d53e593bf7a07.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240 2x"
+        data-sizes="auto"
+        alt="http://upload-images.jianshu.io/upload_images/3647768-760d53e593bf7a07.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240"
+        title="localechooser_languagelist_0" /></p>
+<ol start="3">
+<li>提示所选的语言可能不能完全显示，继续选择<code>是</code></li>
+</ol>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="http://upload-images.jianshu.io/upload_images/3647768-fd16801deea95114.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240"
+        data-srcset="http://upload-images.jianshu.io/upload_images/3647768-fd16801deea95114.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240, http://upload-images.jianshu.io/upload_images/3647768-fd16801deea95114.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240 1.5x, http://upload-images.jianshu.io/upload_images/3647768-fd16801deea95114.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240 2x"
+        data-sizes="auto"
+        alt="http://upload-images.jianshu.io/upload_images/3647768-fd16801deea95114.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240"
+        title="localechooser_translation_warn-severe_0" /></p>
+<ol start="4">
+<li>选择母语区域</li>
+</ol>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="http://upload-images.jianshu.io/upload_images/3647768-cbcdc01572a64889.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240"
+        data-srcset="http://upload-images.jianshu.io/upload_images/3647768-cbcdc01572a64889.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240, http://upload-images.jianshu.io/upload_images/3647768-cbcdc01572a64889.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240 1.5x, http://upload-images.jianshu.io/upload_images/3647768-cbcdc01572a64889.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240 2x"
+        data-sizes="auto"
+        alt="http://upload-images.jianshu.io/upload_images/3647768-cbcdc01572a64889.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240"
+        title="localechooser_shortlist_0" /></p>
+<ol start="5">
+<li>配置键盘，这里选择<code>美国</code>或者<code>汉语</code>都是可以的，键位都一样</li>
+</ol>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="http://upload-images.jianshu.io/upload_images/3647768-f6ef873fe2c60966.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240"
+        data-srcset="http://upload-images.jianshu.io/upload_images/3647768-f6ef873fe2c60966.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240, http://upload-images.jianshu.io/upload_images/3647768-f6ef873fe2c60966.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240 1.5x, http://upload-images.jianshu.io/upload_images/3647768-f6ef873fe2c60966.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240 2x"
+        data-sizes="auto"
+        alt="http://upload-images.jianshu.io/upload_images/3647768-f6ef873fe2c60966.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240"
+        title="keyboard-configuration_xkb-keymap_0" /></p>
+<ol start="6">
+<li>等待加载额外组件后，配置网络，主机名可以随意填写，我这里就填写omv</li>
+</ol>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="http://upload-images.jianshu.io/upload_images/3647768-3a2676ac12b33a93.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240"
+        data-srcset="http://upload-images.jianshu.io/upload_images/3647768-3a2676ac12b33a93.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240, http://upload-images.jianshu.io/upload_images/3647768-3a2676ac12b33a93.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240 1.5x, http://upload-images.jianshu.io/upload_images/3647768-3a2676ac12b33a93.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240 2x"
+        data-sizes="auto"
+        alt="http://upload-images.jianshu.io/upload_images/3647768-3a2676ac12b33a93.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240"
+        title="netcfg_get_hostname_0" /></p>
+<ol start="7">
+<li>网络域名配置，没什么特殊要求的就先不填写了，后面都可以修改</li>
+</ol>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="http://upload-images.jianshu.io/upload_images/3647768-fb6ace99204b71c6.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240"
+        data-srcset="http://upload-images.jianshu.io/upload_images/3647768-fb6ace99204b71c6.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240, http://upload-images.jianshu.io/upload_images/3647768-fb6ace99204b71c6.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240 1.5x, http://upload-images.jianshu.io/upload_images/3647768-fb6ace99204b71c6.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240 2x"
+        data-sizes="auto"
+        alt="http://upload-images.jianshu.io/upload_images/3647768-fb6ace99204b71c6.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240"
+        title="netcfg_get_domain_0" /></p>
+<ol start="8">
+<li>设置root用户密码</li>
+</ol>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="http://upload-images.jianshu.io/upload_images/3647768-91033d363a91bf0d.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240"
+        data-srcset="http://upload-images.jianshu.io/upload_images/3647768-91033d363a91bf0d.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240, http://upload-images.jianshu.io/upload_images/3647768-91033d363a91bf0d.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240 1.5x, http://upload-images.jianshu.io/upload_images/3647768-91033d363a91bf0d.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240 2x"
+        data-sizes="auto"
+        alt="http://upload-images.jianshu.io/upload_images/3647768-91033d363a91bf0d.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240"
+        title="passwd_root-password_0" /></p>
+<ol start="9">
+<li>增加普通用户，名字当然是可以随选取的，看你的意愿了</li>
+</ol>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="http://upload-images.jianshu.io/upload_images/3647768-7295fcbe3554067b.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240"
+        data-srcset="http://upload-images.jianshu.io/upload_images/3647768-7295fcbe3554067b.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240, http://upload-images.jianshu.io/upload_images/3647768-7295fcbe3554067b.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240 1.5x, http://upload-images.jianshu.io/upload_images/3647768-7295fcbe3554067b.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240 2x"
+        data-sizes="auto"
+        alt="http://upload-images.jianshu.io/upload_images/3647768-7295fcbe3554067b.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240"
+        title="passwd_user-fullname_0" /></p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="http://upload-images.jianshu.io/upload_images/3647768-7a4a01c18a818331.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240"
+        data-srcset="http://upload-images.jianshu.io/upload_images/3647768-7a4a01c18a818331.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240, http://upload-images.jianshu.io/upload_images/3647768-7a4a01c18a818331.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240 1.5x, http://upload-images.jianshu.io/upload_images/3647768-7a4a01c18a818331.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240 2x"
+        data-sizes="auto"
+        alt="http://upload-images.jianshu.io/upload_images/3647768-7a4a01c18a818331.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240"
+        title="passwd_user-fullname_0" /></p>
+<ol start="10">
+<li>设置上面用户的密码</li>
+</ol>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="http://upload-images.jianshu.io/upload_images/3647768-0598cfd3f7b4290e.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240"
+        data-srcset="http://upload-images.jianshu.io/upload_images/3647768-0598cfd3f7b4290e.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240, http://upload-images.jianshu.io/upload_images/3647768-0598cfd3f7b4290e.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240 1.5x, http://upload-images.jianshu.io/upload_images/3647768-0598cfd3f7b4290e.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240 2x"
+        data-sizes="auto"
+        alt="http://upload-images.jianshu.io/upload_images/3647768-0598cfd3f7b4290e.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240"
+        title="passwd_user-password_0" /></p>
+<ol start="11">
+<li>如果机器是UEFI启动的，就会出现下面的提示，我的主板只支持UEFI启动，并且我只会在这一块硬盘上安装一个系统，所以可以选择<code>强制使用UEFI安装</code>，如果你一块硬盘已有系统，可以选择否，引导以后也可以修改，<code>强制使用UEFI安装</code>保证你这次安装下次开机可以引导到Debian。</li>
+</ol>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="http://upload-images.jianshu.io/upload_images/3647768-26aab0643a8fa3ea.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240"
+        data-srcset="http://upload-images.jianshu.io/upload_images/3647768-26aab0643a8fa3ea.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240, http://upload-images.jianshu.io/upload_images/3647768-26aab0643a8fa3ea.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240 1.5x, http://upload-images.jianshu.io/upload_images/3647768-26aab0643a8fa3ea.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240 2x"
+        data-sizes="auto"
+        alt="http://upload-images.jianshu.io/upload_images/3647768-26aab0643a8fa3ea.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240"
+        title="partman-efi_non_efi_system_0" /></p>
+<ol start="12">
+<li>磁盘分区,这里我选择<code>使用整个磁盘并且配置LVM</code></li>
+</ol>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="http://upload-images.jianshu.io/upload_images/3647768-acbabfd09bc74f4b.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240"
+        data-srcset="http://upload-images.jianshu.io/upload_images/3647768-acbabfd09bc74f4b.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240, http://upload-images.jianshu.io/upload_images/3647768-acbabfd09bc74f4b.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240 1.5x, http://upload-images.jianshu.io/upload_images/3647768-acbabfd09bc74f4b.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240 2x"
+        data-sizes="auto"
+        alt="http://upload-images.jianshu.io/upload_images/3647768-acbabfd09bc74f4b.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240"
+        title="partman-auto_init_automatically_partition_0" /></p>
+<ol start="13">
+<li>选择你想安装Debian的硬盘盘位</li>
+</ol>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="http://upload-images.jianshu.io/upload_images/3647768-424a8a6ecd354886.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240"
+        data-srcset="http://upload-images.jianshu.io/upload_images/3647768-424a8a6ecd354886.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240, http://upload-images.jianshu.io/upload_images/3647768-424a8a6ecd354886.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240 1.5x, http://upload-images.jianshu.io/upload_images/3647768-424a8a6ecd354886.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240 2x"
+        data-sizes="auto"
+        alt="http://upload-images.jianshu.io/upload_images/3647768-424a8a6ecd354886.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240"
+        title="partman-auto_select_disk_0" /></p>
+<ol start="14">
+<li>磁盘分区，还是按照向导所说，选择所有文件在同一个分区</li>
+</ol>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="http://upload-images.jianshu.io/upload_images/3647768-a5e99c2b6af3e923.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240"
+        data-srcset="http://upload-images.jianshu.io/upload_images/3647768-a5e99c2b6af3e923.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240, http://upload-images.jianshu.io/upload_images/3647768-a5e99c2b6af3e923.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240 1.5x, http://upload-images.jianshu.io/upload_images/3647768-a5e99c2b6af3e923.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240 2x"
+        data-sizes="auto"
+        alt="http://upload-images.jianshu.io/upload_images/3647768-a5e99c2b6af3e923.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240"
+        title="partman-auto_choose_recipe_0" /></p>
+<ol start="15">
+<li>将分区写入磁盘</li>
+</ol>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="http://upload-images.jianshu.io/upload_images/3647768-fbc42ab49ae2deea.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240"
+        data-srcset="http://upload-images.jianshu.io/upload_images/3647768-fbc42ab49ae2deea.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240, http://upload-images.jianshu.io/upload_images/3647768-fbc42ab49ae2deea.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240 1.5x, http://upload-images.jianshu.io/upload_images/3647768-fbc42ab49ae2deea.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240 2x"
+        data-sizes="auto"
+        alt="http://upload-images.jianshu.io/upload_images/3647768-fbc42ab49ae2deea.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240"
+        title="partman-lvm_confirm_0" /></p>
+<ol start="16">
+<li>依然是磁盘分区设置，按照如下选择，你不选是，你就到不了下一步啊，哈哈~</li>
+</ol>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="http://upload-images.jianshu.io/upload_images/3647768-4645278e018a24d9.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240"
+        data-srcset="http://upload-images.jianshu.io/upload_images/3647768-4645278e018a24d9.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240, http://upload-images.jianshu.io/upload_images/3647768-4645278e018a24d9.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240 1.5x, http://upload-images.jianshu.io/upload_images/3647768-4645278e018a24d9.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240 2x"
+        data-sizes="auto"
+        alt="http://upload-images.jianshu.io/upload_images/3647768-4645278e018a24d9.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240"
+        title="partman-lvm_device_remove_lvm_0" /></p>
+<ol start="17">
+<li>磁盘分区结束，下面是列出你的分区配置，不满意的还可以往前重新调，如果可以了，就写入磁盘，如下：</li>
+</ol>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="http://upload-images.jianshu.io/upload_images/3647768-1ef12206ba56d58f.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240"
+        data-srcset="http://upload-images.jianshu.io/upload_images/3647768-1ef12206ba56d58f.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240, http://upload-images.jianshu.io/upload_images/3647768-1ef12206ba56d58f.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240 1.5x, http://upload-images.jianshu.io/upload_images/3647768-1ef12206ba56d58f.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240 2x"
+        data-sizes="auto"
+        alt="http://upload-images.jianshu.io/upload_images/3647768-1ef12206ba56d58f.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240"
+        title="partman_choose_partition_0" /></p>
+<ol start="18">
+<li>最后再次确认一下分区配置，可以选择<code>是</code></li>
+</ol>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="http://upload-images.jianshu.io/upload_images/3647768-aafab2f3837ae8f6.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240"
+        data-srcset="http://upload-images.jianshu.io/upload_images/3647768-aafab2f3837ae8f6.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240, http://upload-images.jianshu.io/upload_images/3647768-aafab2f3837ae8f6.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240 1.5x, http://upload-images.jianshu.io/upload_images/3647768-aafab2f3837ae8f6.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240 2x"
+        data-sizes="auto"
+        alt="http://upload-images.jianshu.io/upload_images/3647768-aafab2f3837ae8f6.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240"
+        title="partman_confirm_0" /></p>
+<ol start="19">
+<li>之后便是安装基本系统的进度条在跑了，稍等片刻…….</li>
+</ol>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="http://upload-images.jianshu.io/upload_images/3647768-c1b016d920c1731a.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240"
+        data-srcset="http://upload-images.jianshu.io/upload_images/3647768-c1b016d920c1731a.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240, http://upload-images.jianshu.io/upload_images/3647768-c1b016d920c1731a.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240 1.5x, http://upload-images.jianshu.io/upload_images/3647768-c1b016d920c1731a.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240 2x"
+        data-sizes="auto"
+        alt="http://upload-images.jianshu.io/upload_images/3647768-c1b016d920c1731a.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240"
+        title="image-20190202222040681" /></p>
+<ol start="20">
+<li>安装基本系统完毕后，需要选择包管理镜像地址，选祖国：</li>
+</ol>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="http://upload-images.jianshu.io/upload_images/3647768-305fff4c30af8627.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240"
+        data-srcset="http://upload-images.jianshu.io/upload_images/3647768-305fff4c30af8627.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240, http://upload-images.jianshu.io/upload_images/3647768-305fff4c30af8627.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240 1.5x, http://upload-images.jianshu.io/upload_images/3647768-305fff4c30af8627.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240 2x"
+        data-sizes="auto"
+        alt="http://upload-images.jianshu.io/upload_images/3647768-305fff4c30af8627.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240"
+        title="mirror_http_countries_0" /></p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="http://upload-images.jianshu.io/upload_images/3647768-832b55cfe4424e7e.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240"
+        data-srcset="http://upload-images.jianshu.io/upload_images/3647768-832b55cfe4424e7e.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240, http://upload-images.jianshu.io/upload_images/3647768-832b55cfe4424e7e.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240 1.5x, http://upload-images.jianshu.io/upload_images/3647768-832b55cfe4424e7e.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240 2x"
+        data-sizes="auto"
+        alt="http://upload-images.jianshu.io/upload_images/3647768-832b55cfe4424e7e.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240"
+        title="mirror_http_countries_0" /></p>
+<ol start="21">
+<li>选择镜像地址</li>
+</ol>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="http://upload-images.jianshu.io/upload_images/3647768-ba626780076bf0c0.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240"
+        data-srcset="http://upload-images.jianshu.io/upload_images/3647768-ba626780076bf0c0.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240, http://upload-images.jianshu.io/upload_images/3647768-ba626780076bf0c0.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240 1.5x, http://upload-images.jianshu.io/upload_images/3647768-ba626780076bf0c0.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240 2x"
+        data-sizes="auto"
+        alt="http://upload-images.jianshu.io/upload_images/3647768-ba626780076bf0c0.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240"
+        title="mirror_http_mirror_0" /></p>
+<ol start="22">
+<li>包管理代理配置 留空，以后有需要可以在配置</li>
+</ol>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="http://upload-images.jianshu.io/upload_images/3647768-634a2c2217c44062.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240"
+        data-srcset="http://upload-images.jianshu.io/upload_images/3647768-634a2c2217c44062.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240, http://upload-images.jianshu.io/upload_images/3647768-634a2c2217c44062.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240 1.5x, http://upload-images.jianshu.io/upload_images/3647768-634a2c2217c44062.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240 2x"
+        data-sizes="auto"
+        alt="http://upload-images.jianshu.io/upload_images/3647768-634a2c2217c44062.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240"
+        title="mirror_http_proxy_0" /></p>
+<ol start="24">
+<li>收集用户信息弹框，如果不介意的话，选择是</li>
+</ol>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="http://upload-images.jianshu.io/upload_images/3647768-49e66eb58daed29d.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240"
+        data-srcset="http://upload-images.jianshu.io/upload_images/3647768-49e66eb58daed29d.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240, http://upload-images.jianshu.io/upload_images/3647768-49e66eb58daed29d.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240 1.5x, http://upload-images.jianshu.io/upload_images/3647768-49e66eb58daed29d.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240 2x"
+        data-sizes="auto"
+        alt="http://upload-images.jianshu.io/upload_images/3647768-49e66eb58daed29d.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240"
+        title="popularity-contest_participate_0" /></p>
+<ol start="25">
+<li>软件选择了最小安装，那就小到极致点吧，以后想要什么就再加。</li>
+</ol>
+<blockquote>
+<p>PS: 如果要装OMV,最后这一步不要装图形。</p>
+</blockquote>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="http://upload-images.jianshu.io/upload_images/3647768-11c0c71c3741a454.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240"
+        data-srcset="http://upload-images.jianshu.io/upload_images/3647768-11c0c71c3741a454.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240, http://upload-images.jianshu.io/upload_images/3647768-11c0c71c3741a454.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240 1.5x, http://upload-images.jianshu.io/upload_images/3647768-11c0c71c3741a454.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240 2x"
+        data-sizes="auto"
+        alt="http://upload-images.jianshu.io/upload_images/3647768-11c0c71c3741a454.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240"
+        title="tasksel_first_0" /></p>
+<p>这里的安装进度会持续比较长的时间…取决于你的配置和你的网络速度，静下心来喝杯茶等待…….</p>
+<ol start="27">
+<li>出现下面的画面，已经大功告成了！，选择继续，机器将重启，这个时候拔出你的启动U盘，之后进入安装好的Debian系统，至此Debian的最小安装就算完了。</li>
+</ol>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="http://upload-images.jianshu.io/upload_images/3647768-c3c6cfdd4c1eee76.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240"
+        data-srcset="http://upload-images.jianshu.io/upload_images/3647768-c3c6cfdd4c1eee76.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240, http://upload-images.jianshu.io/upload_images/3647768-c3c6cfdd4c1eee76.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240 1.5x, http://upload-images.jianshu.io/upload_images/3647768-c3c6cfdd4c1eee76.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240 2x"
+        data-sizes="auto"
+        alt="http://upload-images.jianshu.io/upload_images/3647768-c3c6cfdd4c1eee76.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240"
+        title="finish-install_reboot_in_progress_0" /></p>
+<h2 id="安装完后的操作">安装完后的操作</h2>
+<blockquote>
+<p>系统安装完成后，会启动到命令行界面，因为我们刚才就是最小安装的，是没有安装图形界面的，这个时候使用你刚才创建的用户名或者你的root用户，输入你的密码，进入到系统中，下面就可以为所欲为了。</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># 切换到root用户</span>
+su -           
+<span class="c1"># 第一步还是先更新</span>
+apt-get update
+
+<span class="c1"># 安装网络工具包 net-tools ifconfig命令需要</span>
+apt-get install net-tools
+<span class="c1"># vim</span>
+apt-get install vim
+<span class="c1"># curl</span>
+apt-get install curl
+<span class="c1"># 安装sudo</span>
+apt-get install sudo
+<span class="c1"># 替换你的用户名 user_name</span>
+usermod -aG sudo user_name
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="查看你机器的ip">查看你机器的IP</h2>
+<p>在安装<code> net-tools</code>依赖之后，你可以查看你的机器IP是多少</p>
+<p>命令行填写 <code>ifconfig</code> 即可查看</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="http://upload-images.jianshu.io/upload_images/3647768-400468cdf0c7c3b5.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240"
+        data-srcset="http://upload-images.jianshu.io/upload_images/3647768-400468cdf0c7c3b5.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240, http://upload-images.jianshu.io/upload_images/3647768-400468cdf0c7c3b5.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240 1.5x, http://upload-images.jianshu.io/upload_images/3647768-400468cdf0c7c3b5.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240 2x"
+        data-sizes="auto"
+        alt="http://upload-images.jianshu.io/upload_images/3647768-400468cdf0c7c3b5.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240"
+        title="image-20190202232054542" /></p>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>更新于 2019-02-10</span>
+            </div>
+            <div class="post-info-license"></div>
+        </div>
+        <div class="post-info-line">
+            <div class="post-info-md"><span>
+                            <a class="link-to-markdown" href="/install-debian9/index.md" target="_blank">阅读原始文档</a>
+                        </span></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="https://qinkangdeid.github.io/install-debian9/" data-title="安装Debian9" data-image="/images/omv/debian.jpg" data-ralateuid="qinkangdeid"><i class="fab fa-weibo fa-fw"></i></a><a href="javascript:void(0);" title="分享到 百度" data-sharer="baidu" data-url="https://qinkangdeid.github.io/install-debian9/" data-title="安装Debian9"><i data-svg-src="https://cdn.jsdelivr.net/npm/simple-icons@2.14.0/icons/baidu.svg"></i></a><a href="javascript:void(0);" title="分享到 Evernote" data-sharer="evernote" data-url="https://qinkangdeid.github.io/install-debian9/" data-title="安装Debian9"><i class="fab fa-evernote fa-fw"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/omv/">OMV</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/install/" class="prev" rel="prev" title="黑苹果安装记录"><i class="fas fa-angle-left fa-fw"></i>黑苹果安装记录</a>
+            <a href="/omv-install-flashmemory/" class="next" rel="next" title="OMV安装 flashmemory">OMV安装 flashmemory<i class="fas fa-angle-right fa-fw"></i></a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.74.3">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw"></i> LoveIt</a>
+                </div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2019 - 2020</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">qinkangdeid</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="回到顶部">
+                <i class="fas fa-arrow-up fa-fw"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="查看评论">
+                <i class="fas fa-comment fa-fw"></i>
+            </a>
+        </div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery.js@1.2.0/dist/css/lightgallery.min.css"><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/smooth-scroll@16.1.3/dist/smooth-scroll.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.2.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lightgallery.js@1.2.0/dist/js/lightgallery.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lg-thumbnail.js@1.2.0/dist/lg-thumbnail.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lg-zoom.js@1.2.0/dist/lg-zoom.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sharer.js@0.4.0/sharer.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":10},"comment":{},"lightGallery":{"actualSize":false,"exThumbImage":"data-thumbnail","hideBarsDelay":2000,"selector":".lightgallery","speed":400,"thumbContHeight":80,"thumbWidth":80,"thumbnail":true}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

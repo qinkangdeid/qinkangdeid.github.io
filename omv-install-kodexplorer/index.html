@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+        <title>OMV安装可道云(kodexplorer) - qinkangdeid &#39;s blog</title><meta name="Description" content="关于 qinkangdeid &#39;s blog "><meta property="og:title" content="OMV安装可道云(kodexplorer)" />
+<meta property="og:description" content="[TOC] 可道云是一款云端文档管理软件，开源的，基于PHP开发。 为了方便管理，我这里特地新建了一个共享文件夹，专门存放应用的配置文件,我这里选择创建" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://qinkangdeid.github.io/omv-install-kodexplorer/" />
+<meta property="og:image" content="https://qinkangdeid.github.io/logo.png"/>
+<meta property="article:published_time" content="2019-02-15T19:49:59+08:00" />
+<meta property="article:modified_time" content="2019-02-15T19:49:59+08:00" />
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://qinkangdeid.github.io/logo.png"/>
+
+<meta name="twitter:title" content="OMV安装可道云(kodexplorer)"/>
+<meta name="twitter:description" content="[TOC] 可道云是一款云端文档管理软件，开源的，基于PHP开发。 为了方便管理，我这里特地新建了一个共享文件夹，专门存放应用的配置文件,我这里选择创建"/>
+<meta name="application-name" content="qinkangdeid">
+<meta name="apple-mobile-web-app-title" content="qinkangdeid"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://qinkangdeid.github.io/omv-install-kodexplorer/" /><link rel="prev" href="https://qinkangdeid.github.io/omv-install-aria2/" /><link rel="next" href="https://qinkangdeid.github.io/omv-install-docker/" /><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/normalize.css@8.0.1/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.13.0/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.7.2/animate.min.css"><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "OMV安装可道云(kodexplorer)",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/qinkangdeid.github.io\/omv-install-kodexplorer\/"
+        },"image": [{
+                            "@type": "ImageObject",
+                            "url": "https:\/\/qinkangdeid.github.io\/images\/Apple-Devices-Preview.png",
+                            "width":  3200 ,
+                            "height":  2048 
+                        }],"genre": "posts","keywords": "OMV","wordcount":  2112 ,
+        "url": "https:\/\/qinkangdeid.github.io\/omv-install-kodexplorer\/","datePublished": "2019-02-15T19:49:59+08:00","dateModified": "2019-02-15T19:49:59+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+            "@type": "Organization",
+            "name": "qinkangdeid","logo": {
+                    "@type": "ImageObject",
+                    "url": "https:\/\/qinkangdeid.github.io\/images\/avatar.png",
+                    "width":  664 ,
+                    "height":  664 
+                }},"author": {
+                "@type": "Person",
+                "name": "qinkangdeid"
+            },"description": ""
+    }
+    </script></head>
+    <body header-desktop="fixed" header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="qinkangdeid &#39;s blog"><span class="header-title-pre"><i class='far fa-kiss-wink-heart fa-fw'></i></span>qinkangdeid &#39;s blog</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 所有文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><a class="menu-item" href="/categories/documentation/"> 文档 </a><a class="menu-item" href="/about/"> 关于 </a><a class="menu-item" href="https://github.com/qinkangdeid" title="GitHub" rel="noopener noreffer" target="_blank"><i class='fab fa-github fa-fw'></i>  </a><span class="menu-item delimiter"></span><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="qinkangdeid &#39;s blog"><span class="header-title-pre"><i class='far fa-kiss-wink-heart fa-fw'></i></span>qinkangdeid &#39;s blog</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><a class="menu-item" href="/posts/" title="">所有文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a class="menu-item" href="/categories/documentation/" title="">文档</a><a class="menu-item" href="/about/" title="">关于</a><a class="menu-item" href="https://github.com/qinkangdeid" title="GitHub" rel="noopener noreffer" target="_blank"><i class='fab fa-github fa-fw'></i></a><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                <i class="fas fa-adjust fa-fw"></i>
+            </a></div>
+    </div>
+</header>
+<div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+</div>
+<main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">目录</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animated flipInX">OMV安装可道云(kodexplorer)</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>qinkangdeid</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/%E6%8A%98%E8%85%BE/"><i class="far fa-folder fa-fw"></i>折腾</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2019-02-15">2019-02-15</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 2112 字&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 5 分钟&nbsp;</div>
+        </div><div class="featured-image"><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/omv/kod.png"
+        data-srcset="/images/omv/kod.png, /images/omv/kod.png 1.5x, /images/omv/kod.png 2x"
+        data-sizes="auto"
+        alt="/images/omv/kod.png"
+        title="/images/omv/kod.png" /></div><div class="details toc" id="toc-static"  kept="">
+                <div class="details-summary toc-title">
+                    <span>目录</span>
+                    <span><i class="details-icon fas fa-angle-right"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#方法一使用omv插件nginx安装">方法一：使用OMV插件nginx安装</a>
+      <ul>
+        <li><a href="#前期准备">前期准备</a></li>
+        <li><a href="#安装文件管理">安装文件管理</a></li>
+      </ul>
+    </li>
+    <li><a href="#方法二使用docker安装">方法二：使用Docker安装</a></li>
+    <li><a href="#访问可道云">访问可道云</a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><p>[TOC]</p>
+<blockquote>
+<p>可道云是一款云端文档管理软件，开源的，基于PHP开发。</p>
+</blockquote>
+<p>为了方便管理，我这里特地新建了一个共享文件夹，专门存放应用的配置文件,我这里选择创建<code>appdata</code>文件夹，创建共享文件夹的方式可见<a href="https://www.jianshu.com/p/67b3587bb597" target="_blank" rel="noopener noreffer">这里</a></p>
+<p>OMV的磁盘地址一般映射在 <code>/srv</code>下面
+具体的硬盘信息可以查看 <code>文件系统</code>查看</p>
+<p>比如我的硬盘</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320000217.png"
+        data-srcset="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320000217.png, https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320000217.png 1.5x, https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320000217.png 2x"
+        data-sizes="auto"
+        alt="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320000217.png"
+        title="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320000217.png" /></p>
+<p>在我的<code>/srv</code>下的地址是：</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320000232.png"
+        data-srcset="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320000232.png, https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320000232.png 1.5x, https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320000232.png 2x"
+        data-sizes="auto"
+        alt="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320000232.png"
+        title="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320000232.png" /></p>
+<blockquote>
+<p>请记得你自己的磁盘位置  后面的命令需要替换成你自己的磁盘地址</p>
+</blockquote>
+<p>所以我的<code>appdata</code>文件夹的位置是：<code>/srv/dev-disk-by-label-kulh2t/appdata</code>,我将会在这个文件夹下新建一个子文件夹<code>kodexplorer</code>来存放可道云的资源文件，你可以选择你愿意存放的地址存放</p>
+<blockquote>
+<p>这里记录下我实践后的两种安装方法：</p>
+</blockquote>
+<ul>
+<li>使用OMV插件nginx安装</li>
+<li>docker安装</li>
+</ul>
+<h2 id="方法一使用omv插件nginx安装">方法一：使用OMV插件nginx安装</h2>
+<h3 id="前期准备">前期准备</h3>
+<p>下载nginx插件</p>
+<blockquote>
+<p>nginx属于omv拓展(omv-extras)插件，如果没有安装拓展包是搜索不到的，如果你还没有安装omv-extras的话，请先安装<a href="https://www.jianshu.com/p/4a0aa7e48515" target="_blank" rel="noopener noreffer">OMV安装omv-extras</a></p>
+</blockquote>
+<blockquote>
+<p>系统 —&gt; 插件 —&gt;搜索nginx</p>
+</blockquote>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320000258.png"
+        data-srcset="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320000258.png, https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320000258.png 1.5x, https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320000258.png 2x"
+        data-sizes="auto"
+        alt="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320000258.png"
+        title="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320000258.png" /></p>
+<p>安装完刷新页面即可看到服务</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320000315.png"
+        data-srcset="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320000315.png, https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320000315.png 1.5x, https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320000315.png 2x"
+        data-sizes="auto"
+        alt="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320000315.png"
+        title="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320000315.png" /></p>
+<p>创建一个Pools</p>
+<blockquote>
+<p>这里要注意，我这里选择的pools的用户和用户所在组是<code>qinkangdeid</code>和<code>www-data</code>，选取的用户一定是要在www-data组下，不然访问不到，这个时候需要将用户加到你指定的pools的组别下面</p>
+</blockquote>
+<blockquote>
+<p>要查看你的用户 属于哪些组 可以使用 <code>id USER_NAME</code>查看，例如：</p>
+</blockquote>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320000334.png"
+        data-srcset="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320000334.png, https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320000334.png 1.5x, https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320000334.png 2x"
+        data-sizes="auto"
+        alt="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320000334.png"
+        title="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320000334.png" /></p>
+<p>如果你所选的用户还不在你所选的组下，可以将这个用户加入改组中</p>
+<blockquote>
+<p>将一个已有用户增加到一个已有用户组中,使用 <code> usermod</code>命令，
+完整的命令：<code>usermod -aG group_name user_name</code>（将<code>group_name</code>和<code>user_name</code>替换成你的目标组和目标即可。）
+例如：<code>usermod -aG www-data qinkangdeid</code></p>
+</blockquote>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320000359.png"
+        data-srcset="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320000359.png, https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320000359.png 1.5x, https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320000359.png 2x"
+        data-sizes="auto"
+        alt="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320000359.png"
+        title="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320000359.png" /></p>
+<p>切到<code>Server</code>，编辑服务器</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320000559.png"
+        data-srcset="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320000559.png, https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320000559.png 1.5x, https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320000559.png 2x"
+        data-sizes="auto"
+        alt="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320000559.png"
+        title="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320000559.png" /></p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320000614.png"
+        data-srcset="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320000614.png, https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320000614.png 1.5x, https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320000614.png 2x"
+        data-sizes="auto"
+        alt="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320000614.png"
+        title="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320000614.png" />
+开启nginx服务</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320000628.png"
+        data-srcset="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320000628.png, https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320000628.png 1.5x, https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320000628.png 2x"
+        data-sizes="auto"
+        alt="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320000628.png"
+        title="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320000628.png" /></p>
+<p>web服务已经准备好了，下面开始安装应用</p>
+<h3 id="安装文件管理">安装文件管理</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># cd到指定目录 你可以cd到指定你想要安装的位置</span>
+<span class="nb">cd</span> /srv/dev-disk-by-label-kulh2t/appdata/kodexplorer
+<span class="c1"># 下载web文件</span>
+wget http://static.kodcloud.com/update/download/kodexplorer4.37.zip
+<span class="c1"># 安装unzip 已经安装忽略</span>
+apt-get install unzip
+<span class="c1"># 解压</span>
+unzip kodexplorer4.37.zip
+<span class="c1"># 赋予权限</span>
+chmod -Rf <span class="m">777</span> ./*
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="方法二使用docker安装">方法二：使用Docker安装</h2>
+<blockquote>
+<p>docker安装的好处是不用管依赖的问题，非常方便也非常容易安装。
+这里使用的是我根据网上大佬们的Dockfile修改一点东西得来的<a href="https://cloud.docker.com/repository/docker/qinkangdeid/kodexplorer" target="_blank" rel="noopener noreffer">镜像</a>
+数据卷有两个：</p>
+</blockquote>
+<ul>
+<li>
+<p><code>/var/www/html</code>: 这个PHP环境静态资源的存放路径，可道云的配置文件后面就是放到了这里，整个docker是一个php环境，所以以后还有静态的资源，都是可以放在这里访问的</p>
+</li>
+<li>
+<p><code>/data</code>: 数据映射位置 ，容器里的可道云只能访问容器里的数据，所以要想访问宿主机也就是你NAS机器上的数据， 就需要将宿主机的数据路径映射到容器里面</p>
+</li>
+<li>
+<p>拉取镜像
+<img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320000644.png"
+        data-srcset="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320000644.png, https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320000644.png 1.5x, https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320000644.png 2x"
+        data-sizes="auto"
+        alt="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320000644.png"
+        title="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320000644.png" />
+在<code>Parameters</code>处填写要拉取镜像的出处：这里我拉的是：<code>qinkangdeid/kodexplorer</code></p>
+</li>
+</ul>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320000700.png"
+        data-srcset="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320000700.png, https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320000700.png 1.5x, https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320000700.png 2x"
+        data-sizes="auto"
+        alt="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320000700.png"
+        title="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320000700.png" /></p>
+<p>等待一会，拉取完成，即可查看：</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320000714.png"
+        data-srcset="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320000714.png, https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320000714.png 1.5x, https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320000714.png 2x"
+        data-sizes="auto"
+        alt="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320000714.png"
+        title="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320000714.png" /></p>
+<p>下面是运行容器：
+选中刚才拉取的镜像，点击<code>Run Image</code>：
+<img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320000730.png"
+        data-srcset="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320000730.png, https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320000730.png 1.5x, https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320000730.png 2x"
+        data-sizes="auto"
+        alt="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320000730.png"
+        title="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320000730.png" /></p>
+<p>配置运行：
+<img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320000744.png"
+        data-srcset="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320000744.png, https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320000744.png 1.5x, https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320000744.png 2x"
+        data-sizes="auto"
+        alt="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320000744.png"
+        title="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320000744.png" /></p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320000808.png"
+        data-srcset="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320000808.png, https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320000808.png 1.5x, https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320000808.png 2x"
+        data-sizes="auto"
+        alt="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320000808.png"
+        title="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320000808.png" /></p>
+<p>之后点击<code>保存</code>运行容器，之后可以看到运行的容器：</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320000828.png"
+        data-srcset="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320000828.png, https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320000828.png 1.5x, https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320000828.png 2x"
+        data-sizes="auto"
+        alt="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320000828.png"
+        title="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320000828.png" /></p>
+<blockquote>
+<p>不想用Docker可视化界面操作的话，也可以使用下面的命令一键安装运行容器，命令执行完成后，在docker可视化界面都能看到容器的状态</p>
+</blockquote>
+<p>复制下面的命令到终端执行
+<strong>PS</strong>：<strong>记得替换你的宿主机路径</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">docker run -d -p 9000:80 --name kodexplorer  <span class="se">\
+</span><span class="se"></span> -v /srv/dev-disk-by-label-kulh2t/appdata/www:/var/www/html  <span class="se">\
+</span><span class="se"></span> -v /srv:/data  <span class="se">\
+</span><span class="se"></span> qinkangdeid/kodexplorer
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="访问可道云">访问可道云</h2>
+<ul>
+<li>访问路径：http://你的IP:9000/kodexplorer</li>
+</ul>
+<blockquote>
+<p>注意刚才设置的9000端口访问的基文件夹是appdata,appdata下面创建了一个<code>kodexplorer</code>文件夹存放可道云的资源文件，所以访问可道云的时候需要再加上<code>kodexplorer</code>，如果你直接解压在appdata文件夹下面，则不需要加了，为了少开端口，以后还有什么web应用，我都是放在appdata下面的，加一个文件夹区分应用就好了</p>
+</blockquote>
+<p>当你第一次打开的时候，应该看见如下界面，会提示一个错误，
+<em>PS</em>: docker方式安装不会有这个错误</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320000846.png"
+        data-srcset="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320000846.png, https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320000846.png 1.5x, https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320000846.png 2x"
+        data-sizes="auto"
+        alt="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320000846.png"
+        title="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320000846.png" /></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># 那是因为我们没有安装phpGD库环境</span>
+error:
+
+须开启php GD库,否则验证码、缩略图使用将不正常
+</code></pre></td></tr></table>
+</div>
+</div><p>解决：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">apt-get install php7.0-gd
+</code></pre></td></tr></table>
+</div>
+</div><p>重新刷新一下界面，看到已经恢复正常</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320000902.png"
+        data-srcset="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320000902.png, https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320000902.png 1.5x, https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320000902.png 2x"
+        data-sizes="auto"
+        alt="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320000902.png"
+        title="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320000902.png" /></p>
+<p>这里要设置管理员密码，设置你的管理员密码，然后确定，页面自动刷新到新的登录页</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320000917.png"
+        data-srcset="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320000917.png, https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320000917.png 1.5x, https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320000917.png 2x"
+        data-sizes="auto"
+        alt="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320000917.png"
+        title="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320000917.png" /></p>
+<p>这里无需多言，填写你刚才的用户密码登录吧</p>
+<p>登录完之后，安全起见，在用户管理里把其他两个用户禁用/删除（当然，如果你想保留，也是可以的）</p>
+<blockquote>
+</blockquote>
+<p>删除/禁用多余的用户
+<img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320000936.png"
+        data-srcset="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320000936.png, https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320000936.png 1.5x, https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320000936.png 2x"
+        data-sizes="auto"
+        alt="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320000936.png"
+        title="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320000936.png" /></p>
+<p>这就是可道云的文件管理界面了</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320000949.png"
+        data-srcset="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320000949.png, https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320000949.png 1.5x, https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320000949.png 2x"
+        data-sizes="auto"
+        alt="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320000949.png"
+        title="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320000949.png" /></p>
+<blockquote>
+<p>Docker方式安装的注意：运行容器的时候<code>/data</code>映射到了宿主机的磁盘位置，所以你要查看宿主机的文件，应当去<code>/data</code>下访问</p>
+</blockquote>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320001004.png"
+        data-srcset="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320001004.png, https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320001004.png 1.5x, https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320001004.png 2x"
+        data-sizes="auto"
+        alt="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320001004.png"
+        title="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320001004.png" /></p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320001022.png"
+        data-srcset="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320001022.png, https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320001022.png 1.5x, https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320001022.png 2x"
+        data-sizes="auto"
+        alt="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320001022.png"
+        title="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320001022.png" /></p>
+<p>还有一个看似很吊的桌面，不过我没用过</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320001037.png"
+        data-srcset="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320001037.png, https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320001037.png 1.5x, https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320001037.png 2x"
+        data-sizes="auto"
+        alt="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320001037.png"
+        title="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320001037.png" /></p>
+<blockquote>
+<p>PS: 在用可道云的时候，你可能发现有些目录只能<code>只读</code>而不能写，这是因为OMV的权限设置不允许，可道云的运行用户和组是<code>www-data</code>,所以需要把用户和组别加入到共享文件夹中</p>
+</blockquote>
+<p>比如我现在的一个硬盘的<code>downloads</code>共享文件夹现在是<code>只读</code>状态</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320001053.png"
+        data-srcset="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320001053.png, https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320001053.png 1.5x, https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320001053.png 2x"
+        data-sizes="auto"
+        alt="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320001053.png"
+        title="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320001053.png" /></p>
+<p>前往 <code>访问权限控制管理</code> &ndash;&gt; <code>共享文件夹</code>  对共享文件夹进项<code>ALC</code>权限控制 如下 将要允许访问的共享文件夹把<code>www-data</code>的用户和组别加上访问权限即可，如下图，最后点击<code>应用</code></p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320001109.png"
+        data-srcset="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320001109.png, https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320001109.png 1.5x, https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320001109.png 2x"
+        data-sizes="auto"
+        alt="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320001109.png"
+        title="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320001109.png" /></p>
+<p>现在刷新可道云的文件管理，可以看到 只读标志 已经消失 ：</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320001123.png"
+        data-srcset="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320001123.png, https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320001123.png 1.5x, https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320001123.png 2x"
+        data-sizes="auto"
+        alt="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320001123.png"
+        title="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320001123.png" /></p>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>更新于 2019-02-15</span>
+            </div>
+            <div class="post-info-license"></div>
+        </div>
+        <div class="post-info-line">
+            <div class="post-info-md"><span>
+                            <a class="link-to-markdown" href="/omv-install-kodexplorer/index.md" target="_blank">阅读原始文档</a>
+                        </span></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="https://qinkangdeid.github.io/omv-install-kodexplorer/" data-title="OMV安装可道云(kodexplorer)" data-image="/images/omv/kod.png" data-ralateuid="qinkangdeid"><i class="fab fa-weibo fa-fw"></i></a><a href="javascript:void(0);" title="分享到 百度" data-sharer="baidu" data-url="https://qinkangdeid.github.io/omv-install-kodexplorer/" data-title="OMV安装可道云(kodexplorer)"><i data-svg-src="https://cdn.jsdelivr.net/npm/simple-icons@2.14.0/icons/baidu.svg"></i></a><a href="javascript:void(0);" title="分享到 Evernote" data-sharer="evernote" data-url="https://qinkangdeid.github.io/omv-install-kodexplorer/" data-title="OMV安装可道云(kodexplorer)"><i class="fab fa-evernote fa-fw"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/omv/">OMV</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/omv-install-aria2/" class="prev" rel="prev" title="OMV配置Aria2"><i class="fas fa-angle-left fa-fw"></i>OMV配置Aria2</a>
+            <a href="/omv-install-docker/" class="next" rel="next" title="OMV配置Docker">OMV配置Docker<i class="fas fa-angle-right fa-fw"></i></a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.74.3">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw"></i> LoveIt</a>
+                </div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2019 - 2020</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">qinkangdeid</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="回到顶部">
+                <i class="fas fa-arrow-up fa-fw"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="查看评论">
+                <i class="fas fa-comment fa-fw"></i>
+            </a>
+        </div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery.js@1.2.0/dist/css/lightgallery.min.css"><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/smooth-scroll@16.1.3/dist/smooth-scroll.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.2.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lightgallery.js@1.2.0/dist/js/lightgallery.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lg-thumbnail.js@1.2.0/dist/lg-thumbnail.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lg-zoom.js@1.2.0/dist/lg-zoom.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sharer.js@0.4.0/sharer.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":10},"comment":{},"lightGallery":{"actualSize":false,"exThumbImage":"data-thumbnail","hideBarsDelay":2000,"selector":".lightgallery","speed":400,"thumbContHeight":80,"thumbWidth":80,"thumbnail":true}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

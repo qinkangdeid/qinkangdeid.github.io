@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+        <title>KoolShare-LEDE-x86安装 - qinkangdeid &#39;s blog</title><meta name="Description" content="关于 qinkangdeid &#39;s blog "><meta property="og:title" content="KoolShare-LEDE-x86安装" />
+<meta property="og:description" content="前期矿难就入了一款蜗牛星际的矿机，之前一直安装的是黑裙在使用，也因为已经装了OMV了，体验完了之后看看还有什么用处，正好是双网口， 这颗CPU" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://qinkangdeid.github.io/install-koolshare-lede/" />
+<meta property="og:image" content="https://qinkangdeid.github.io/logo.png"/>
+<meta property="article:published_time" content="2019-05-03T11:59:16+08:00" />
+<meta property="article:modified_time" content="2019-05-03T11:59:16+08:00" />
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://qinkangdeid.github.io/logo.png"/>
+
+<meta name="twitter:title" content="KoolShare-LEDE-x86安装"/>
+<meta name="twitter:description" content="前期矿难就入了一款蜗牛星际的矿机，之前一直安装的是黑裙在使用，也因为已经装了OMV了，体验完了之后看看还有什么用处，正好是双网口， 这颗CPU"/>
+<meta name="application-name" content="qinkangdeid">
+<meta name="apple-mobile-web-app-title" content="qinkangdeid"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://qinkangdeid.github.io/install-koolshare-lede/" /><link rel="prev" href="https://qinkangdeid.github.io/rock64-install-omv/" /><link rel="next" href="https://qinkangdeid.github.io/typora-config-picgo/" /><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/normalize.css@8.0.1/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.13.0/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.7.2/animate.min.css"><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "KoolShare-LEDE-x86安装",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/qinkangdeid.github.io\/install-koolshare-lede\/"
+        },"image": [{
+                            "@type": "ImageObject",
+                            "url": "https:\/\/qinkangdeid.github.io\/images\/Apple-Devices-Preview.png",
+                            "width":  3200 ,
+                            "height":  2048 
+                        }],"genre": "posts","keywords": "Router","wordcount":  1756 ,
+        "url": "https:\/\/qinkangdeid.github.io\/install-koolshare-lede\/","datePublished": "2019-05-03T11:59:16+08:00","dateModified": "2019-05-03T11:59:16+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+            "@type": "Organization",
+            "name": "qinkangdeid","logo": {
+                    "@type": "ImageObject",
+                    "url": "https:\/\/qinkangdeid.github.io\/images\/avatar.png",
+                    "width":  664 ,
+                    "height":  664 
+                }},"author": {
+                "@type": "Person",
+                "name": "qinkangdeid"
+            },"description": ""
+    }
+    </script></head>
+    <body header-desktop="fixed" header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="qinkangdeid &#39;s blog"><span class="header-title-pre"><i class='far fa-kiss-wink-heart fa-fw'></i></span>qinkangdeid &#39;s blog</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 所有文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><a class="menu-item" href="/categories/documentation/"> 文档 </a><a class="menu-item" href="/about/"> 关于 </a><a class="menu-item" href="https://github.com/qinkangdeid" title="GitHub" rel="noopener noreffer" target="_blank"><i class='fab fa-github fa-fw'></i>  </a><span class="menu-item delimiter"></span><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="qinkangdeid &#39;s blog"><span class="header-title-pre"><i class='far fa-kiss-wink-heart fa-fw'></i></span>qinkangdeid &#39;s blog</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><a class="menu-item" href="/posts/" title="">所有文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a class="menu-item" href="/categories/documentation/" title="">文档</a><a class="menu-item" href="/about/" title="">关于</a><a class="menu-item" href="https://github.com/qinkangdeid" title="GitHub" rel="noopener noreffer" target="_blank"><i class='fab fa-github fa-fw'></i></a><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                <i class="fas fa-adjust fa-fw"></i>
+            </a></div>
+    </div>
+</header>
+<div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+</div>
+<main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">目录</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animated flipInX">KoolShare-LEDE-x86安装</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>qinkangdeid</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/%E6%8A%98%E8%85%BE/"><i class="far fa-folder fa-fw"></i>折腾</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2019-05-03">2019-05-03</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 1756 字&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 4 分钟&nbsp;</div>
+        </div><div class="featured-image"><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/omv/koolshare-lede.png"
+        data-srcset="/images/omv/koolshare-lede.png, /images/omv/koolshare-lede.png 1.5x, /images/omv/koolshare-lede.png 2x"
+        data-sizes="auto"
+        alt="/images/omv/koolshare-lede.png"
+        title="/images/omv/koolshare-lede.png" /></div><div class="details toc" id="toc-static"  kept="">
+                <div class="details-summary toc-title">
+                    <span>目录</span>
+                    <span><i class="details-icon fas fa-angle-right"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#前期准备">前期准备</a></li>
+    <li><a href="#下载固件">下载固件</a></li>
+    <li><a href="#固件写盘">固件写盘</a></li>
+    <li><a href="#重启lede">重启LEDE</a></li>
+    <li><a href="#修改lede管理地址">修改LEDE管理地址</a></li>
+    <li><a href="#进入lede管理界面">进入LEDE管理界面</a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><p>前期矿难就入了一款蜗牛星际的矿机，之前一直安装的是黑裙在使用，也因为已经装了OMV了，体验完了之后看看还有什么用处，正好是双网口，</p>
+<p>这颗CPU用来做软路由的也很多。所以就想拿来刷LEDE做软路由用了，也有很多人是PVE上装的LEDE+黑裙，J1900也不强，虽说个人这样使用也是够的。我没有太多的要求要上什么双路由之类的，也不玩虚拟，所以我就实体安装一个就行，以后就都不用动了，只装一个LEDE。</p>
+<p>我这里是打算用软路由做主路由，硬路由做AP。软路由对于家用来说，比硬路由更加有优势，也不用愁硬路由那几百M的内存了，而且还有很多插件使用，爽歪歪。</p>
+<blockquote>
+<p>已经有太多人写了很多优秀文章了，一定会有不同的操作或更简单的方法，我也是个小白，所以这里只是我一个实际操作记录。仅供参考</p>
+</blockquote>
+<h2 id="前期准备">前期准备</h2>
+<ul>
+<li>x86设备（我这里就是蜗牛J1900）</li>
+<li>固件</li>
+<li>PE</li>
+<li>系统盘（大于8G应该就OK了 我这里是16G的垃圾msata）</li>
+<li>显示器</li>
+</ul>
+<h2 id="下载固件">下载固件</h2>
+<p>固件下载可以直接到官方固件下载：http://firmware.koolshare.cn/LEDE_X64_fw867
+)下载,我的msata的硬盘，所以没工具不能扯下来Windows写盘，所以我选择了<code>虚拟机转盘或PE下写盘专用</code>，我选择UEFI方式的启动固件,待会在PE下写盘。</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320150636.png"
+        data-srcset="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320150636.png, https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320150636.png 1.5x, https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320150636.png 2x"
+        data-sizes="auto"
+        alt="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320150636.png"
+        title="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320150636.png" /></p>
+<p>写盘需要用到<code>physdiskwrite</code>这个软件，下载地址见下：</p>
+<blockquote>
+<p>链接: <a href="https://pan.baidu.com/s/16nQzGnp9Y8JlOVuSDAqiOA">https://pan.baidu.com/s/16nQzGnp9Y8JlOVuSDAqiOA</a> 提取码: vc5t</p>
+</blockquote>
+<h2 id="固件写盘">固件写盘</h2>
+<p>假设你已经有了PE系统了，将之前下载的固件和写盘工具两个一起复制到你的PE盘里。
+PE启动盘插入到你的x86机器里，U盘启动进PE。</p>
+<ul>
+<li>格式化系统盘
+启动<code>DiskGenius</code>对系统盘进行<code>删除所有分区</code>操作
+<img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320150655.png"
+        data-srcset="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320150655.png, https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320150655.png 1.5x, https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320150655.png 2x"
+        data-sizes="auto"
+        alt="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320150655.png"
+        title="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320150655.png" /></li>
+</ul>
+<p>弹出确认窗口 <code>是(Y)</code></p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320150713.png"
+        data-srcset="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320150713.png, https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320150713.png 1.5x, https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320150713.png 2x"
+        data-sizes="auto"
+        alt="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320150713.png"
+        title="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320150713.png" /></p>
+<p>保存更改</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320150729.png"
+        data-srcset="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320150729.png, https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320150729.png 1.5x, https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320150729.png 2x"
+        data-sizes="auto"
+        alt="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320150729.png"
+        title="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320150729.png" /></p>
+<p>之后可以看见系统盘空空如也</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320150747.png"
+        data-srcset="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320150747.png, https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320150747.png 1.5x, https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320150747.png 2x"
+        data-sizes="auto"
+        alt="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320150747.png"
+        title="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320150747.png" /></p>
+<ul>
+<li>将固件写入系统盘
+这个时候查看你的PE盘里的固件和写盘工具在PE下的盘符是多少，我的是 U，
+<img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320150804.png"
+        data-srcset="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320150804.png, https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320150804.png 1.5x, https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320150804.png 2x"
+        data-sizes="auto"
+        alt="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320150804.png"
+        title="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320150804.png" /></li>
+</ul>
+<p>然后快捷键<code>win+R</code>在弹出的窗口输入<code>cmd</code>进入命令行（如果你系统盘可以使用其他的介质在Windows上读取的话，就可以不用在PE下制作了）</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320150819.png"
+        data-srcset="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320150819.png, https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320150819.png 1.5x, https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320150819.png 2x"
+        data-sizes="auto"
+        alt="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320150819.png"
+        title="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320150819.png" /></p>
+<p>切换到你的固件所在盘符，我的是 U
+<img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320150838.png"
+        data-srcset="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320150838.png, https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320150838.png 1.5x, https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320150838.png 2x"
+        data-sizes="auto"
+        alt="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320150838.png"
+        title="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320150838.png" /></p>
+<p>之后使用<code>physdiskwrite -u 你的固件名称</code>来刷写进系统盘中，例如我现在的固件名为<code>openwrt-koolshare-mod-v2.30-r10402-51ad900e2c-x86-64-uefi-gpt-squashfs.img.gz</code>
+那么我的刷写命令是：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">physdiskwrite -u openwrt-koolshare-mod-v2.30-r10402-51ad900e2c-x86-64-uefi-gpt-squashfs.img.gz
+</code></pre></td></tr></table>
+</div>
+</div><p>之后按回车，选择要刷写的系统盘的位置，看准你的系统盘是哪一个了，不要刷错了，我的是在第 0 个位置，所以我选 0
+<img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320150855.png"
+        data-srcset="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320150855.png, https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320150855.png 1.5x, https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320150855.png 2x"
+        data-sizes="auto"
+        alt="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320150855.png"
+        title="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320150855.png" /></p>
+<p>之后会有一个确认提示，确认无误后就填写  <code>y</code>,之后回车</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320150911.png"
+        data-srcset="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320150911.png, https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320150911.png 1.5x, https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320150911.png 2x"
+        data-sizes="auto"
+        alt="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320150911.png"
+        title="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320150911.png" /></p>
+<p>回车之后就开始将固件刷写进系统盘里了，耐心等待，大概需要一两分钟，成功之后会有如下提示：
+<img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320150927.png"
+        data-srcset="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320150927.png, https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320150927.png 1.5x, https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320150927.png 2x"
+        data-sizes="auto"
+        alt="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320150927.png"
+        title="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320150927.png" /></p>
+<p>这个时候固件刷写完毕了，整个过程就完成了。</p>
+<h2 id="重启lede">重启LEDE</h2>
+<p>现在拔出你的PE启动盘，点击<code>重启</code>，之后你会看见屏幕在刷一大堆日志</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320150944.png"
+        data-srcset="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320150944.png, https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320150944.png 1.5x, https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320150944.png 2x"
+        data-sizes="auto"
+        alt="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320150944.png"
+        title="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320150944.png" /></p>
+<p>刷到最后不动了，例如下面这样就表示启动成功了</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320151004.png"
+        data-srcset="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320151004.png, https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320151004.png 1.5x, https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320151004.png 2x"
+        data-sizes="auto"
+        alt="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320151004.png"
+        title="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320151004.png" /></p>
+<p>之后你随便敲击一下键盘，即可看见logo界面和bash命令行</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320151022.png"
+        data-srcset="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320151022.png, https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320151022.png 1.5x, https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320151022.png 2x"
+        data-sizes="auto"
+        alt="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320151022.png"
+        title="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320151022.png" /></p>
+<h2 id="修改lede管理地址">修改LEDE管理地址</h2>
+<p>LEDE的默认管理地址是<code>192.168.1.1</code>,这个地址通常也是光猫的管理地址，为了不引起冲突，需要修改LEDE的默认管理地址为其他地址，直接在刚在命令行上修改地址
+输入命令<code>vim /etc/config/network</code>,之后按字母<code>i</code>进入编辑模式,将默认的<code>192.168.1.1</code>修改为其他的地址，我这里将其修改为<code>192.168.100.1</code> 之后按<code>:wq!</code>保存退出，粗暴一点，直接再敲击输入<code>reboot</code>重启LEDE。</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320151040.png"
+        data-srcset="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320151040.png, https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320151040.png 1.5x, https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320151040.png 2x"
+        data-sizes="auto"
+        alt="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320151040.png"
+        title="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320151040.png" /></p>
+<h2 id="进入lede管理界面">进入LEDE管理界面</h2>
+<p>这个时候再次启动了LEDE，可以吧显示器断开软路由机器了，之后将网线插到软路由的一个网口上，进入LEDE后台管理界面，工作机器浏览器输入你刚才修改的LEDE管理地址我这里是<code>192.168.100.1</code></p>
+<blockquote>
+<p>用户名 root
+密码 koolshare</p>
+</blockquote>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320151057.png"
+        data-srcset="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320151057.png, https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320151057.png 1.5x, https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320151057.png 2x"
+        data-sizes="auto"
+        alt="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320151057.png"
+        title="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320151057.png" /></p>
+<ul>
+<li>修改wan拨号
+如果你想要使用路由拨号，那么你需要修改你的光猫为<code>桥接模式</code>，把拨号工作交给软路由。
+软路由有两个网口，一个用来做wan，一个用来做lan口。怎么设置是没所谓的，随便指定一个就好了。
+我现在的lan口是<code>eth0</code>,wan口是<code>eth1</code></li>
+</ul>
+<p>进到<code>网络</code>&ndash;&gt;<code>接口</code>&ndash;&gt;<code>WAN</code>标签下，设置<code>PPPoE</code>拨号,填入你的宽带账号和密码，保存应用即可</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320151111.png"
+        data-srcset="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320151111.png, https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320151111.png 1.5x, https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320151111.png 2x"
+        data-sizes="auto"
+        alt="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320151111.png"
+        title="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320151111.png" /></p>
+<p>等待一小会，去<code>总览</code>就能看见网络信息了
+<img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320151125.png"
+        data-srcset="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320151125.png, https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320151125.png 1.5x, https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320151125.png 2x"
+        data-sizes="auto"
+        alt="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320151125.png"
+        title="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320151125.png" /></p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320151140.png"
+        data-srcset="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320151140.png, https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320151140.png 1.5x, https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320151140.png 2x"
+        data-sizes="auto"
+        alt="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320151140.png"
+        title="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320151140.png" /></p>
+<p>现在你打开网页，应该就可以上网了。</p>
+<p>LEDE的软件中心插件真的很多</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320151156.png"
+        data-srcset="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320151156.png, https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320151156.png 1.5x, https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320151156.png 2x"
+        data-sizes="auto"
+        alt="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320151156.png"
+        title="https://raw.githubusercontent.com/qinkangdeid/pics/imgs/20200320151156.png" /></p>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>更新于 2019-05-03</span>
+            </div>
+            <div class="post-info-license"></div>
+        </div>
+        <div class="post-info-line">
+            <div class="post-info-md"><span>
+                            <a class="link-to-markdown" href="/install-koolshare-lede/index.md" target="_blank">阅读原始文档</a>
+                        </span></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="https://qinkangdeid.github.io/install-koolshare-lede/" data-title="KoolShare-LEDE-x86安装" data-image="/images/omv/koolshare-lede.png" data-ralateuid="qinkangdeid"><i class="fab fa-weibo fa-fw"></i></a><a href="javascript:void(0);" title="分享到 百度" data-sharer="baidu" data-url="https://qinkangdeid.github.io/install-koolshare-lede/" data-title="KoolShare-LEDE-x86安装"><i data-svg-src="https://cdn.jsdelivr.net/npm/simple-icons@2.14.0/icons/baidu.svg"></i></a><a href="javascript:void(0);" title="分享到 Evernote" data-sharer="evernote" data-url="https://qinkangdeid.github.io/install-koolshare-lede/" data-title="KoolShare-LEDE-x86安装"><i class="fab fa-evernote fa-fw"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/router/">Router</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/rock64-install-omv/" class="prev" rel="prev" title="Rock64安装OpenMediaVault"><i class="fas fa-angle-left fa-fw"></i>Rock64安装OpenMediaVault</a>
+            <a href="/typora-config-picgo/" class="next" rel="next" title="Typora设置PicGo图床">Typora设置PicGo图床<i class="fas fa-angle-right fa-fw"></i></a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.74.3">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw"></i> LoveIt</a>
+                </div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2019 - 2020</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">qinkangdeid</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="回到顶部">
+                <i class="fas fa-arrow-up fa-fw"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="查看评论">
+                <i class="fas fa-comment fa-fw"></i>
+            </a>
+        </div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery.js@1.2.0/dist/css/lightgallery.min.css"><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/smooth-scroll@16.1.3/dist/smooth-scroll.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.2.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lightgallery.js@1.2.0/dist/js/lightgallery.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lg-thumbnail.js@1.2.0/dist/lg-thumbnail.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lg-zoom.js@1.2.0/dist/lg-zoom.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sharer.js@0.4.0/sharer.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":10},"comment":{},"lightGallery":{"actualSize":false,"exThumbImage":"data-thumbnail","hideBarsDelay":2000,"selector":".lightgallery","speed":400,"thumbContHeight":80,"thumbWidth":80,"thumbnail":true}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>
